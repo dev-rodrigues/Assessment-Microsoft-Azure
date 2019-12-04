@@ -1,4 +1,4 @@
-namespace API_paises.Areas.HelpPage
+namespace API_PAISES.Areas.HelpPage
 {
     /// <summary>
     /// Indicates whether the sample is used for request or response

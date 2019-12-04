@@ -1,12 +1,9 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace API_paises
-{
-    public class FilterConfig
-    {
-        public static void RegisterGlobalFilters(GlobalFilterCollection filters)
-        {
+namespace API_PAISES {
+    public class FilterConfig {
+        public static void RegisterGlobalFilters(GlobalFilterCollection filters) {
             filters.Add(new HandleErrorAttribute());
         }
     }

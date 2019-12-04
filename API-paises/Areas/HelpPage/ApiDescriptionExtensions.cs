@@ -3,7 +3,7 @@ using System.Text;
 using System.Web;
 using System.Web.Http.Description;
 
-namespace API_paises.Areas.HelpPage
+namespace API_PAISES.Areas.HelpPage
 {
     public static class ApiDescriptionExtensions
     {
