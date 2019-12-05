@@ -1,4 +1,5 @@
-﻿using Core.Service.Countries;
+﻿using API_PAISES.Models.InputModel;
+using Core.Service.Countries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +17,28 @@ namespace API_PAISES.Controllers {
     [RoutePrefix("api/county")]
     public class CountryController : ApiController {
 
-        
-
+        [HttpGet]
         public IHttpActionResult Index() {
-            
+            return Ok();
+        }
+
+        [HttpGet]
+        public IHttpActionResult Show(int id) {
+            return Ok();
+        }
+
+        [HttpPost]
+        public IHttpActionResult Store(InputCountryModel input) {
+            return Ok();
+        }
+
+        [HttpPut]
+        public IHttpActionResult Update(InputCountryModel input) {
+            return Ok();
+        }
+
+        [HttpDelete]
+        public IHttpActionResult Destroy(int id) {
             return Ok();
         }
     }
