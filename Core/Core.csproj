@@ -51,21 +51,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Context\Database.cs" />
+    <Compile Include="Context\DatabaseContext.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Friend.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Countries\CountryRepository.cs" />
-    <Compile Include="Repositories\Friends\FriendRepository.cs" />
+    <Compile Include="Repositories\Countries\ICountry.cs" />
+    <Compile Include="Repositories\Countries\ICountyFactory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Data\Data.csproj">
       <Project>{b7dd142d-322d-43ab-825c-91544d926866}</Project>
       <Name>Data</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
