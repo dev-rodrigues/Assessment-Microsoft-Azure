@@ -21,11 +21,11 @@ namespace MVC.Controllers
             var paises = new List<PaisViewModel>();
             var pais1 = new PaisViewModel();
             var pais2 = new PaisViewModel();
-            pais1.PaisId = "1";
+            pais1.Id = "1";
             pais1.Nome = "Brasil";
             pais1.FotoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/2000px-Flag_of_Brazil.svg.png";
 
-            pais2.PaisId = "2";
+            pais2.Id = "2";
             pais2.Nome = "Uruguai";
             pais2.FotoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Uruguay.svg/255px-Flag_of_Uruguay.svg.png";
             paises.Add(pais1);
