@@ -11,13 +11,7 @@ namespace Data.Repository {
     public class FriendRepository : IFriend {
 
         public async Task<Country> Save(Country obj) {
-            try {
-                Database.GetContext.Friends.Add(obj);
-                await Database.GetContext.SaveChangesAsync();
-            } catch(Exception e) {
-                Console.WriteLine(e.Message);
-            }
-            return null;
+            throw new NotImplementedException();
         }
 
         public Task<Country> Update(Country old) {
