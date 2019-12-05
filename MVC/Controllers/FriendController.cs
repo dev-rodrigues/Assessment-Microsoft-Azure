@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace MVC.Controllers
 {
-    public class CountryController : Controller
+    public class FriendController : Controller
     {
         private readonly string base_url = "http://localhost:58373";
 
@@ -18,18 +18,25 @@ namespace MVC.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            var paises = new List<PaisViewModel>();
-            var pais1 = new PaisViewModel();
-            var pais2 = new PaisViewModel();
-            pais1.PaisId = "1";
-            pais1.Nome = "Brasil";
-            pais1.FotoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/2000px-Flag_of_Brazil.svg.png";
+            var amigos = new List<FriendViewModel>();
+            var amg1 = new FriendViewModel();
+            var amg2 = new FriendViewModel();
+            amg1.Id = "1";
+            amg1.Name = "Gabriel";
+            amg1.LastName = "Couto";
+            amg1.Email = "Gabriel@email.com";
+            amg1.Tel = "123";
+            amg1.BirthDate = "26/09/1996";
 
-            pais2.PaisId = "2";
-            pais2.Nome = "Uruguai";
-            pais2.FotoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Uruguay.svg/255px-Flag_of_Uruguay.svg.png";
-            paises.Add(pais1);
-            paises.Add(pais2);
+            amg2.Id = "2";
+            amg2.Name = "Carlos";
+            amg2.LastName = "Henrique";
+            amg2.Email = "Carlos@email.com";
+            amg2.Tel = "123";
+            amg2.BirthDate = "05/10/1994";
+
+            amigos.Add(amg1);
+            amigos.Add(amg2);
 
 
             //using (var client = new HttpClient())
@@ -42,13 +49,13 @@ namespace MVC.Controllers
             //    {
             //        var responseContent = await response.Content.ReadAsStringAsync();
 
-            //        paises = JsonConvert.DeserializeObject<List<PaisViewModel>>(responseContent);
+            //        paises = JsonConvert.DeserializeObject<List<FriendViewModel>>(responseContent);
 
             //        return View(paises);
             //    }
             //}
 
-            return View(paises);
+            return View(amigos);
         }
 
         [HttpGet]
@@ -60,12 +67,15 @@ namespace MVC.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(FormCollection collection)
         {
-            var novoPais = new PaisViewModel();
+            var novoPais = new FriendViewModel();
 
             var data = new Dictionary<string, string>
             {
-                {"Nome", collection["Nome"]},
-                {"FotoUrl", collection["FotoUrl"]}
+                {"Name", collection["Name"]},
+                {"LastName", collection["LastName"] },
+                {"Tel", collection["Tel"] },
+                {"Email", collection["Email"] },
+                {"BirthDate", collection["BirthDate"] },
             };
 
             using (var client = new HttpClient())
@@ -74,7 +84,7 @@ namespace MVC.Controllers
 
                 using (var requestContent = new FormUrlEncodedContent(data))
                 {
-                    var response = await client.PostAsync("api/Country/Store", requestContent);
+                    var response = await client.PostAsync("api/Friend/Store", requestContent);
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -88,21 +98,21 @@ namespace MVC.Controllers
         [HttpGet]
         public async Task<ActionResult> Edit(string id)
         {
-            PaisViewModel pais = new PaisViewModel();
+            FriendViewModel amigo = new FriendViewModel();
 
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(base_url);
 
-                var response = await client.GetAsync($"api/Country/Show?id={id}");
+                var response = await client.GetAsync($"api/Friend/Show?id={id}");
 
                 if (response.IsSuccessStatusCode)
                 {
                     var responseContent = await response.Content.ReadAsStringAsync();
 
-                    pais = JsonConvert.DeserializeObject<PaisViewModel>(responseContent);
+                    amigo = JsonConvert.DeserializeObject<FriendViewModel>(responseContent);
 
-                    return View(pais);
+                    return View(amigo);
                 }
             }
 
@@ -115,8 +125,11 @@ namespace MVC.Controllers
         {
             var data = new Dictionary<string, string>
             {
-                {"Nome", collection["Nome"]},
-                {"FotoUrl", collection["FotoUrl"]}
+                {"Name", collection["Name"]},
+                {"LastName", collection["LastName"] },
+                {"Tel", collection["Tel"] },
+                {"Email", collection["Email"] },
+                {"BirthDate", collection["BirthDate"] },
             };
 
             using (var client = new HttpClient())
@@ -125,7 +138,7 @@ namespace MVC.Controllers
 
                 using (var requestContent = new FormUrlEncodedContent(data))
                 {
-                    var response = await client.PutAsync("api/Country/Update", requestContent);
+                    var response = await client.PutAsync("api/Friend/Update", requestContent);
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -143,21 +156,21 @@ namespace MVC.Controllers
         [HttpGet]
         public async Task<ActionResult> Delete(string id)
         {
-            PaisViewModel pais = new PaisViewModel();
+            FriendViewModel amigo = new FriendViewModel();
 
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(base_url);
 
-                var response = await client.GetAsync($"api/Country/Show?id={id}");
+                var response = await client.GetAsync($"api/Friend/Show?id={id}");
 
                 if (response.IsSuccessStatusCode)
                 {
                     var responseContent = await response.Content.ReadAsStringAsync();
 
-                    pais = JsonConvert.DeserializeObject<PaisViewModel>(responseContent);
+                    amigo = JsonConvert.DeserializeObject<FriendViewModel>(responseContent);
 
-                    return View(pais);
+                    return View(amigo);
                 }
             }
 
@@ -171,7 +184,7 @@ namespace MVC.Controllers
             {
                 client.BaseAddress = new Uri(base_url);
 
-                var response = await client.GetAsync($"api/Country/Destroy?id={id}");
+                var response = await client.GetAsync($"api/Friend/Destroy?id={id}");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -187,26 +200,25 @@ namespace MVC.Controllers
         [HttpGet]
         public async Task<ActionResult> Details(string id)
         {
-            PaisViewModel pais = new PaisViewModel();
+            FriendViewModel amigo = new FriendViewModel();
 
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(base_url);
 
-                var response = await client.GetAsync($"api/Country/Show?id={id}");
+                var response = await client.GetAsync($"api/Friend/Show?id={id}");
 
                 if (response.IsSuccessStatusCode)
                 {
                     var responseContent = await response.Content.ReadAsStringAsync();
 
-                    pais = JsonConvert.DeserializeObject<PaisViewModel>(responseContent);
+                    amigo = JsonConvert.DeserializeObject<FriendViewModel>(responseContent);
 
-                    return View(pais);
+                    return View(amigo);
                 }
             }
 
             return View();
         }
-
     }
 }

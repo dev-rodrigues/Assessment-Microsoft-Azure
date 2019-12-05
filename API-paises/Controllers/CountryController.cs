@@ -14,7 +14,7 @@ using System.Web.UI.WebControls;
 
 namespace API_PAISES.Controllers {
 
-    [RoutePrefix("api/country")]
+    [RoutePrefix("api/Country")]
     public class CountryController : ApiController {
 
         [HttpGet]

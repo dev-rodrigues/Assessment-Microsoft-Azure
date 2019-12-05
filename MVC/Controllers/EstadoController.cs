@@ -19,24 +19,37 @@ namespace MVC.Controllers
         public async Task<ActionResult> Index()
         {
             var estados = new List<EstadoViewModel>();
+            var rj = new EstadoViewModel();
+            var sp = new EstadoViewModel();
+            rj.EstadoId = "1";
+            rj.Nome = "Rio de Janeiro";
+            rj.FotoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Bandeira_do_estado_do_Rio_de_Janeiro.svg/1200px-Bandeira_do_estado_do_Rio_de_Janeiro.svg.png";
 
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(base_url);
+            sp.EstadoId = "2";
+            sp.Nome = "Sao Paulo";
+            sp.FotoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Bandeira_do_estado_de_S%C3%A3o_Paulo.svg/275px-Bandeira_do_estado_de_S%C3%A3o_Paulo.svg.png";
+            estados.Add(rj);
+            estados.Add(sp);
 
-                var response = await client.GetAsync($"/api/paises");
+            //var estados = new List<EstadoViewModel>();
 
-                if (response.IsSuccessStatusCode)
-                {
-                    var responseContent = await response.Content.ReadAsStringAsync();
+            //using (var client = new HttpClient())
+            //{
+            //    client.BaseAddress = new Uri(base_url);
 
-                    estados = JsonConvert.DeserializeObject<List<EstadoViewModel>>(responseContent);
+            //    var response = await client.GetAsync($"/api/paises");
 
-                    return View(estados);
-                }
-            }
+            //    if (response.IsSuccessStatusCode)
+            //    {
+            //        var responseContent = await response.Content.ReadAsStringAsync();
 
-            return View();
+            //        estados = JsonConvert.DeserializeObject<List<EstadoViewModel>>(responseContent);
+
+            //        return View(estados);
+            //    }
+            //}
+
+            return View(estados);
         }
 
         [HttpGet]
