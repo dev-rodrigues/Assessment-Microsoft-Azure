@@ -175,6 +175,7 @@
     <Content Include="Views\Estado\Edit.cshtml" />
     <Content Include="Views\Estado\Delete.cshtml" />
     <Content Include="Views\Estado\Details.cshtml" />
+    <Content Include="Views\Country\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
