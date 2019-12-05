@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace Data.Repository {
     public class CountryRepository : ICountry {
+        public Task<Country> BuscarPorId(int id) {
+            throw new NotImplementedException();
+        }
+
         public Task Deletar(int id) {
             throw new NotImplementedException();
         }

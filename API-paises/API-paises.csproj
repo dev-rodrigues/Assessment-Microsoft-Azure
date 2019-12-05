@@ -172,7 +172,9 @@
     </Compile>
     <Compile Include="Models\InputModel\InputCountryModel.cs" />
     <Compile Include="Models\InputModel\InputEstadoModel.cs" />
+    <Compile Include="Models\OutputModel\OutputCountryModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\ServiceLocator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -227,8 +229,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\OutputModel\" />
-    <Folder Include="Service\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
