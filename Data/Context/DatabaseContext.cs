@@ -15,7 +15,7 @@ namespace Data.Context {
             get; set;
         }
 
-        public DbSet<Friend> Countries {
+        public DbSet<Country> Countries {
             get; set;
         }
 
