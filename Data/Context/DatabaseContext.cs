@@ -15,6 +15,10 @@ namespace Data.Context {
             get; set;
         }
 
+        public DbSet<Friend> Countries {
+            get; set;
+        }
+
         public DatabaseContext() : base(ConnectionString) {
             Configuration.LazyLoadingEnabled = true;
             Configuration.ProxyCreationEnabled = true;
