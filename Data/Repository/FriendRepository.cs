@@ -8,25 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Data.Repository {
-    public class FriendRepository : IFriend {
+    public class FriendRepository {
 
-        public async Task<Country> Save(Country obj) {
-            throw new NotImplementedException();
-        }
-
-        public Task<Country> Update(Country old) {
-            throw new NotImplementedException();
-        }
-
-        public Task Delete(int id) {
-            throw new NotImplementedException();
-        }
-
-        public Task<Country> Find(int id) {
-            throw new NotImplementedException();
-        }
-        public Task<List<Country>> FindAll(int id) {
-            throw new NotImplementedException();
-        }
     }
 }
