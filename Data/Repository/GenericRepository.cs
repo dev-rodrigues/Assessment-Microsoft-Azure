@@ -1,31 +1,29 @@
-﻿using Core.Models;
-using Core.Service;
-using Data.Context;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Data.Repository {
-    public class FriendRepository : IFriend {
+    public class GenericRepository<T> where T : class {
 
-        public async Task<Country> Save(Country obj) {
+        public T Salvar(T objeto) {
             throw new NotImplementedException();
         }
 
-        public Task<Country> Update(Country old) {
+        public T Editar(T objeto) {
             throw new NotImplementedException();
         }
 
-        public Task Delete(int id) {
+        public void Excluir(int id) {
             throw new NotImplementedException();
         }
 
-        public Task<Country> Find(int id) {
+        public T BuscarPorId(int id) {
             throw new NotImplementedException();
         }
-        public Task<List<Country>> FindAll(int id) {
+
+        public List<T> ListarPorId(int id) {
             throw new NotImplementedException();
         }
     }
