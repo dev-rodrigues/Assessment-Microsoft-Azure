@@ -11,7 +11,7 @@ namespace Data.Context {
 
         private static string ConnectionString = "DefaultConnection";
 
-        public DbSet<Friend> Friends {
+        public DbSet<Country> Friends {
             get; set;
         }
 

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Data.Repository {
     public class FriendRepository : IFriend {
 
-        public async Task<Friend> Save(Friend obj) {
+        public async Task<Country> Save(Country obj) {
             try {
                 Database.GetContext.Friends.Add(obj);
                 await Database.GetContext.SaveChangesAsync();
@@ -20,7 +20,7 @@ namespace Data.Repository {
             return null;
         }
 
-        public Task<Friend> Update(Friend old) {
+        public Task<Country> Update(Country old) {
             throw new NotImplementedException();
         }
 
@@ -28,10 +28,10 @@ namespace Data.Repository {
             throw new NotImplementedException();
         }
 
-        public Task<Friend> Find(int id) {
+        public Task<Country> Find(int id) {
             throw new NotImplementedException();
         }
-        public Task<List<Friend>> FindAll(int id) {
+        public Task<List<Country>> FindAll(int id) {
             throw new NotImplementedException();
         }
     }

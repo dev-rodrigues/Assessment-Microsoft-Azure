@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Core.Models {
-    public class Friend {
+    public class Country {
 
         public int Id {
             get; set;
