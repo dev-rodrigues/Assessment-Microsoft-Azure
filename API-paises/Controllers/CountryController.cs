@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Service.Countries;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -15,5 +16,11 @@ namespace API_PAISES.Controllers {
     [RoutePrefix("api/county")]
     public class CountryController : ApiController {
 
+        
+
+        public IHttpActionResult Index() {
+            
+            return Ok();
+        }
     }
 }
