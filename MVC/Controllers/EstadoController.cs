@@ -74,9 +74,27 @@ namespace MVC.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(string id)
+        public async Task<ActionResult> Edit(string id)
         {
-            return View(id);
+            EstadoViewModel estado = new EstadoViewModel();
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(base_url);
+
+                var response = await client.GetAsync($"api/Country/{id}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+
+                    estado = JsonConvert.DeserializeObject<EstadoViewModel>(responseContent);
+
+                    return View(estado);
+                }
+            }
+
+            return View();
         }
 
         [HttpPut]
@@ -110,9 +128,27 @@ namespace MVC.Controllers
 
 
         [HttpGet]
-        public ActionResult Delete(string id)
+        public async Task<ActionResult> Delete(string id)
         {
-            return View(id);
+            EstadoViewModel estado = new EstadoViewModel();
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(base_url);
+
+                var response = await client.GetAsync($"api/Country/{id}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+
+                    estado = JsonConvert.DeserializeObject<EstadoViewModel>(responseContent);
+
+                    return View(estado);
+                }
+            }
+
+            return View();
         }
 
         [HttpPost]
@@ -136,9 +172,27 @@ namespace MVC.Controllers
         }
 
         [HttpGet]
-        public ActionResult Details(string id)
+        public async Task<ActionResult> Details(string id)
         {
-            return View(id);
+            EstadoViewModel estado = new EstadoViewModel();
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(base_url);
+
+                var response = await client.GetAsync($"api/Country/{id}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+
+                    estado = JsonConvert.DeserializeObject<EstadoViewModel>(responseContent);
+
+                    return View(estado);
+                }
+            }
+
+            return View();
         }
     }
 }
