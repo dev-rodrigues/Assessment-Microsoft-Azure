@@ -1,4 +1,6 @@
 ﻿using API_PAISES.Models.InputModel;
+using Core;
+using Core.Repositories.Countries;
 using Core.Service.Countries;
 using System;
 using System.Collections.Generic;
@@ -17,8 +19,11 @@ namespace API_PAISES.Controllers {
     [RoutePrefix("api/Country")]
     public class CountryController : ApiController {
 
+        
+
         [HttpGet]
         public IHttpActionResult Index() {
+            
             return Ok();
         }
 
