@@ -8,7 +8,7 @@ using System.Web.Http;
 
 namespace API_estados.Controllers {
     [RoutePrefix("api/estado")]
-    public class EstadoController : ApiController {
+    public class StateController : ApiController {
         [HttpGet]
         public IHttpActionResult Index() {
             return Ok();
