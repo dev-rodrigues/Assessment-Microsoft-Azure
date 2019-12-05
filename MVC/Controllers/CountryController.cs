@@ -12,7 +12,7 @@ namespace MVC.Controllers
 {
     public class CountryController : Controller
     {
-        private string base_url = "http://localhost:58373/";
+        private string base_url = "http://localhost:58373";
 
         // GET: Country
         [HttpGet]
