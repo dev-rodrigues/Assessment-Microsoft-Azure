@@ -12,31 +12,43 @@ namespace MVC.Controllers
 {
     public class CountryController : Controller
     {
-        private string base_url = "http://localhost:58373";
+        private readonly string base_url = "http://localhost:58373";
 
         // GET: Country
         [HttpGet]
         public async Task<ActionResult> Index()
         {
             var paises = new List<PaisViewModel>();
+            var pais1 = new PaisViewModel();
+            var pais2 = new PaisViewModel();
+            pais1.PaisId = "1";
+            pais1.Nome = "Brasil";
+            pais1.FotoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/2000px-Flag_of_Brazil.svg.png";
 
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(base_url);
+            pais2.PaisId = "2";
+            pais2.Nome = "Uruguai";
+            pais2.FotoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Uruguay.svg/255px-Flag_of_Uruguay.svg.png";
+            paises.Add(pais1);
+            paises.Add(pais2);
 
-                var response = await client.GetAsync($"/api/paises");
 
-                if (response.IsSuccessStatusCode)
-                {
-                    var responseContent = await response.Content.ReadAsStringAsync();
+            //using (var client = new HttpClient())
+            //{
+            //    client.BaseAddress = new Uri(base_url);
 
-                    paises = JsonConvert.DeserializeObject<List<PaisViewModel>>(responseContent);
+            //    var response = await client.GetAsync("api/Country");
 
-                    return View(paises);
-                }
-            }
+            //    if (response.IsSuccessStatusCode)
+            //    {
+            //        var responseContent = await response.Content.ReadAsStringAsync();
 
-            return View();
+            //        paises = JsonConvert.DeserializeObject<List<PaisViewModel>>(responseContent);
+
+            //        return View(paises);
+            //    }
+            //}
+
+            return View(paises);
         }
 
         [HttpGet]
@@ -62,7 +74,7 @@ namespace MVC.Controllers
 
                 using (var requestContent = new FormUrlEncodedContent(data))
                 {
-                    var response = await client.PostAsync("api/create/pais", requestContent);
+                    var response = await client.PostAsync("api/Country", requestContent);
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -94,7 +106,7 @@ namespace MVC.Controllers
 
                 using (var requestContent = new FormUrlEncodedContent(data))
                 {
-                    var response = await client.PutAsync("Api/Account/update", requestContent);
+                    var response = await client.PutAsync("api/Country", requestContent);
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -122,7 +134,7 @@ namespace MVC.Controllers
             {
                 client.BaseAddress = new Uri(base_url);
 
-                var response = await client.GetAsync($"Api/delete{id}");
+                var response = await client.GetAsync($"api/Country{id}");
 
                 if (response.IsSuccessStatusCode)
                 {
