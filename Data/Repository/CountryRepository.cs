@@ -1,29 +1,26 @@
-﻿using System;
+﻿using Core.Models;
+using Core.Service.Countries;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Data.Repository {
-    public class GenericRepository<T> where T : class {
-
-        public T Salvar(T objeto) {
+    public class CountryRepository : ICountry {
+        public Task Deletar(int id) {
             throw new NotImplementedException();
         }
 
-        public T Editar(T objeto) {
+        public Task<Country> Editar(Country old) {
             throw new NotImplementedException();
         }
 
-        public void Excluir(int id) {
+        public Task<List<Country>> Listar() {
             throw new NotImplementedException();
         }
 
-        public T BuscarPorId(int id) {
-            throw new NotImplementedException();
-        }
-
-        public List<T> ListarPorId(int id) {
+        public Task<Country> Salvar(Country country) {
             throw new NotImplementedException();
         }
     }

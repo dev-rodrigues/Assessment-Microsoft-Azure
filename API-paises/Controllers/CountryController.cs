@@ -1,5 +1,7 @@
 ﻿using API_PAISES.Models.InputModel;
+using API_PAISES.Service;
 using Core;
+using Core.Models;
 using Core.Repositories.Countries;
 using Core.Service.Countries;
 using System;
@@ -19,10 +21,8 @@ namespace API_PAISES.Controllers {
     [RoutePrefix("api/Country")]
     public class CountryController : ApiController {
 
-        
-
         public CountryController() {
-          
+
         }
 
         [HttpGet]
