@@ -51,7 +51,7 @@ namespace API_PAISES.Controllers {
             var output_saved_country = new OutputCountryModel().country(saved_country);
 
             if(saved_country != null) {
-                return Ok(output_saved_country);
+                return CreatedAtRoute("DefaultApi", new { id = output_saved_country.Id }, output_saved_country);
             }
             return BadRequest("Erro ao processar a solicitação");
         }
