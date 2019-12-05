@@ -1,0 +1,41 @@
+﻿@model MVC.Models.EstadoViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EstadoId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstadoId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FotoUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FotoUrl)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
