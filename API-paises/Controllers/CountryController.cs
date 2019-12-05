@@ -21,9 +21,12 @@ namespace API_PAISES.Controllers {
 
         
 
+        public CountryController() {
+          
+        }
+
         [HttpGet]
         public IHttpActionResult Index() {
-            
             return Ok();
         }
 
