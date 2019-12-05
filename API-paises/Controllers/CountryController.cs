@@ -46,8 +46,8 @@ namespace API_PAISES.Controllers {
 
         [HttpPost]
         public async Task<IHttpActionResult> Store(InputCountryModel input) {
-            var country = new InputCountryModel().CreateCountry(input);
-            var saved_country = await GetCountry.Salvar(country);
+            var new_country = new InputCountryModel().CreateCountry(input);
+            var saved_country = await GetCountry.Salvar(new_country);
             var output_saved_country = new OutputCountryModel().country(saved_country);
 
             if(saved_country != null) {
