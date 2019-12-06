@@ -7,21 +7,21 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Core.Repositories.Countries {
-    public class CountryRepository : RepositoryBase<State>, ICountryRepository {
-        public IQueryable<State> Index() {
+    public class CountryRepository : RepositoryBase<Country>, ICountryRepository {
+        public IQueryable<Country> Index() {
             var lista = from p in base.FindAll() select p;
             return lista;
         }
 
-        public State Show(State model, int id) {
+        public Country Show(int id) {
             return base.Find(id);
         }
 
-        public State Store(State model) {
+        public Country Store(Country model) {
             return base.Save(model);
         }
 
-        public State Update(State model) {
+        public Country Update(Country model) {
             return base.Edit(model);
         }
     }

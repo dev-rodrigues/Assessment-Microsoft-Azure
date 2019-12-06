@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Core.Repositories.States {
-    public class StateRepository : RepositoryBase<State>, ICountryRepository {
+    public class StateRepository : RepositoryBase<State>, IStateRepository {
         public IQueryable<State> Index() {
             var lista = from p in base.FindAll() select p;
             return lista;

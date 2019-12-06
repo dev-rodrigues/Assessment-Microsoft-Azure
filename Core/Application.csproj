@@ -60,6 +60,8 @@
     <Compile Include="Repositories\Countries\CountryRepository.cs" />
     <Compile Include="Repositories\Countries\ICountryRepository.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
+    <Compile Include="Repositories\States\IStateRepository.cs" />
+    <Compile Include="Repositories\States\StateRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
