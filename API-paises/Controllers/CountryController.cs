@@ -45,7 +45,7 @@ namespace API_PAISES.Controllers {
                 var converted_country = new OutputCountryModel().country(localized_country);
                 return Ok(converted_country);
             }
-            return BadRequest("Erro ao processar a solicitação");
+            return BadRequest("Erro ao processar a solicitação.");
         }
 
         [HttpPost]
