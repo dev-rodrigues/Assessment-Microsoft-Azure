@@ -26,7 +26,6 @@ namespace API_PAISES.Controllers {
             GetCountryRepository = new CountryRepository();
         }
 
-        //private ICountry GetCountry = ServiceLocator.GetInstanceOf<CountryRepository>();
 
         [HttpGet]
         public IHttpActionResult Index() {

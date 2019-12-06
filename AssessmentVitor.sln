@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.902
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API-paises", "API-paises\API-paises.csproj", "{D06B5461-D450-40A9-B6A2-EB96C4E3E9E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{6860CD47-3E15-4563-895A-259E2ACCC70C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Core\Application.csproj", "{6860CD47-3E15-4563-895A-259E2ACCC70C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APIs", "APIs", "{D3A32D29-AFFF-4B2E-8A1C-8387F8B9153E}"
 EndProject

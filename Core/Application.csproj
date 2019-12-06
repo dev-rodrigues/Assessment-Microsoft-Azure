@@ -54,14 +54,12 @@
   <ItemGroup>
     <Compile Include="Context\DatabaseContext.cs" />
     <Compile Include="Models\Territory\Countries\Country.cs" />
-    <Compile Include="Models\Territory\Countries\ICountry.cs" />
     <Compile Include="Models\Friends\Friend.cs" />
-    <Compile Include="Models\Territory\States\IState.cs" />
     <Compile Include="Models\Territory\States\State.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Countries\CountryRepository.cs" />
     <Compile Include="Repositories\Countries\ICountryRepository.cs" />
-    <Compile Include="Repository\RepositoryBase.cs" />
+    <Compile Include="Repositories\RepositoryBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
