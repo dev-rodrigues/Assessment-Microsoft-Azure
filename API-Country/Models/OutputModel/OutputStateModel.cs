@@ -11,7 +11,7 @@ namespace API_PAISES.Models.OutputModel {
         public string Name { get; set; }
         public string IdImage { get; set; }
 
-        public List<OutputStateModel> countries(List<State> states) {
+        public List<OutputStateModel> states(List<State> states) {
             List<OutputStateModel> output = new List<OutputStateModel>();
             foreach(State state in states) {
                 OutputStateModel model = new OutputStateModel() {
@@ -24,11 +24,11 @@ namespace API_PAISES.Models.OutputModel {
             return output;
         }
 
-        public OutputStateModel country(Country country) {
+        public OutputStateModel country(State state) {
             return new OutputStateModel() {
-                Id = country.Id,
-                Name = country.Name,
-                IdImage = country.URLImage
+                Id = state.Id,
+                Name = state.Name,
+                IdImage = state.URLImage
             };
         }
     }
