@@ -169,6 +169,7 @@
     </Compile>
     <Compile Include="Models\InputModel\InputCountryModel.cs" />
     <Compile Include="Models\InputModel\InputEstadoModel.cs" />
+    <Compile Include="Models\OutputModel\OutputStateModel.cs" />
     <Compile Include="Models\OutputModel\OutputCountryModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

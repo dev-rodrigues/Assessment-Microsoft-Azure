@@ -1,4 +1,5 @@
 ﻿using Core.Models;
+using Core.Models.State;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -17,9 +18,14 @@ namespace Data.Context {
             get; set;
         }
 
+        public DbSet<State> States {
+            get; set;
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
             modelBuilder.Entity<Friend>().MapToStoredProcedures();
             modelBuilder.Entity<Country>().MapToStoredProcedures();
+            modelBuilder.Entity<State>().MapToStoredProcedures();
         }
     }
 }
