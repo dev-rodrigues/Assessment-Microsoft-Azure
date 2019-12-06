@@ -27,5 +27,10 @@ namespace Data.Context {
         public static DatabaseContext Create() {
             return new DatabaseContext();
         }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder) {
+            modelBuilder.Entity<Friend>().MapToStoredProcedures();
+            modelBuilder.Entity<Country>().MapToStoredProcedures();
+        }
     }
 }
