@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Repositories.Countries {
     public interface ICountryRepository {
-        List<Country> Index(Country model);
+        IQueryable<Country> Index();
         Country Show(Country model, int id);
         Country Store(Country model);
         Country Update(Country model);

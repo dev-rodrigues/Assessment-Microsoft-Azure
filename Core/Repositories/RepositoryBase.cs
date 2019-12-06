@@ -8,6 +8,8 @@ using System.Text;
 namespace Data.Repository {
     public class RepositoryBase<T> where T : class {
 
+        protected readonly DatabaseContext context = new DatabaseContext();
+
         public T Save(T model) {
             using(var db = new DatabaseContext()) {
                 try {
@@ -58,15 +60,8 @@ namespace Data.Repository {
             }
         }
 
-        public List<T> FindAll(T model) {
-            using(var db = new DatabaseContext()) {
-                try {
-                    return db.Set<T>().ToList();
-                } catch(Exception e) {
-                    Console.WriteLine(e.Message);
-                    return null;
-                }
-            }
+        public IQueryable<T> FindAll() {
+            return context.Set<T>();
         }
     }
 }

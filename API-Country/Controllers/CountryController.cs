@@ -26,11 +26,11 @@ namespace API_PAISES.Controllers {
             GetCountryRepository = new CountryRepository();
         }
 
-
         [HttpGet]
         public IHttpActionResult Index() {
 
-            var countries = GetCountryRepository.Index(new Country());
+            var countries = GetCountryRepository.Index().ToList<Country>();
+
             if(countries != null) {
                 var converted = new OutputCountryModel().countries(countries);
                 return Ok(converted);

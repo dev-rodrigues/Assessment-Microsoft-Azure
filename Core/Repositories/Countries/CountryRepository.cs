@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace Core.Repositories.Countries {
     public class CountryRepository : RepositoryBase<Country>, ICountryRepository {
-        public List<Country> Index(Country model) {
-            return base.FindAll(model);
+        public IQueryable<Country> Index() {
+            var lista = from p in base.FindAll() select p;
+            return lista;
         }
 
         public Country Show(Country model, int id) {

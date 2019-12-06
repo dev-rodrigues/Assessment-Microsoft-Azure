@@ -18,6 +18,7 @@ namespace API_PAISES.Models.OutputModel {
                     Name = country.Name,
                     IdImage = country.Name
                 };
+                output.Add(model);
             }
             return output;
         }
