@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Core.Models {
-    public class Country {
+    public class State {
         public int Id { get; set; }
         public string Name { get; set; }
         public string URLImage { get; set; }

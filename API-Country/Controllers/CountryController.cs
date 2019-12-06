@@ -29,7 +29,7 @@ namespace API_PAISES.Controllers {
         [HttpGet]
         public IHttpActionResult Index() {
 
-            var countries = GetCountryRepository.Index().ToList<Country>();
+            var countries = GetCountryRepository.Index().ToList<State>();
 
             if(countries != null) {
                 var converted = new OutputCountryModel().countries(countries);
@@ -40,7 +40,7 @@ namespace API_PAISES.Controllers {
 
         [HttpGet]
         public IHttpActionResult Show(int id) {
-            var localized_country = GetCountryRepository.Show(new Country(), id);
+            var localized_country = GetCountryRepository.Show(new State(), id);
             if(localized_country != null) {
                 var converted_country = new OutputCountryModel().country(localized_country);
                 return Ok(converted_country);
@@ -62,7 +62,7 @@ namespace API_PAISES.Controllers {
 
         [HttpPut]
         public IHttpActionResult Update(int id, InputCountryModel input) {
-            var localized_country = GetCountryRepository.Show(new Country(), id);
+            var localized_country = GetCountryRepository.Show(new State(), id);
             localized_country.Name = input.Name;
             localized_country.URLImage = input.IdImage;
 
@@ -77,7 +77,7 @@ namespace API_PAISES.Controllers {
 
         [HttpDelete]
         public IHttpActionResult Destroy(int id) {
-            var localized_country = GetCountryRepository.Show(new Country(), id);
+            var localized_country = GetCountryRepository.Show(new State(), id);
             if(localized_country != null) {
                 GetCountryRepository.Delete(localized_country);
                 return Ok();

@@ -9,8 +9,8 @@ namespace API_PAISES.Models.InputModel {
         public string Name { get; set; }
         public string IdImage { get; set; }
 
-        public Country CreateCountry(InputCountryModel input) {
-            return new Country() {
+        public State CreateCountry(InputCountryModel input) {
+            return new State() {
                 Name = input.Name,
                 URLImage = SetIdImage(input.IdImage)
             };

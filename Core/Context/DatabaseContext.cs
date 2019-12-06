@@ -13,13 +13,13 @@ namespace Data.Context {
             get; set;
         }
 
-        public DbSet<Country> Countries {
+        public DbSet<State> Countries {
             get; set;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
             modelBuilder.Entity<Friend>().MapToStoredProcedures();
-            modelBuilder.Entity<Country>().MapToStoredProcedures();
+            modelBuilder.Entity<State>().MapToStoredProcedures();
         }
     }
 }

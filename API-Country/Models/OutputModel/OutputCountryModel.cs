@@ -10,9 +10,9 @@ namespace API_PAISES.Models.OutputModel {
         public string Name { get; set; }
         public string IdImage { get; set; }
 
-        public List<OutputCountryModel> countries(List<Country> countries) {
+        public List<OutputCountryModel> countries(List<State> countries) {
             List<OutputCountryModel> output = new List<OutputCountryModel>();
-            foreach(Country country in countries) {
+            foreach(State country in countries) {
                 OutputCountryModel model = new OutputCountryModel() {
                     Id = country.Id,
                     Name = country.Name,
@@ -23,7 +23,7 @@ namespace API_PAISES.Models.OutputModel {
             return output;
         }
 
-        public OutputCountryModel country(Country country) {
+        public OutputCountryModel country(State country) {
             return new OutputCountryModel() {
                 Id = country.Id,
                 Name = country.Name,

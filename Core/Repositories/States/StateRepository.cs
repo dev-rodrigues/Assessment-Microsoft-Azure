@@ -1,4 +1,6 @@
 ﻿using Core.Models;
+using Core.Models.State;
+using Core.Repositories.Countries;
 using Data.Repository;
 using System;
 using System.Collections.Generic;
@@ -6,8 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Repositories.Countries {
-    public class CountryRepository : RepositoryBase<State>, ICountryRepository {
+namespace Core.Repositories.States {
+    public class StateRepository : RepositoryBase<State>, ICountryRepository {
         public IQueryable<State> Index() {
             var lista = from p in base.FindAll() select p;
             return lista;
