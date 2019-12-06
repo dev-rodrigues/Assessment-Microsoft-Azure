@@ -12,7 +12,7 @@ namespace Core.Repositories.Countries {
             return base.FindAll(model);
         }
 
-        public Country Show(object id) {
+        public Country Show(Country model, int id) {
             return base.Find(id);
         }
 

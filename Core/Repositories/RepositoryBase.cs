@@ -38,7 +38,7 @@ namespace Data.Repository {
             using(var db = new DatabaseContext()) {
                 try {
                     db.Entry(model).State = System.Data.Entity.EntityState.Deleted;
-                    db.SaveChangesAsync();
+                    db.SaveChanges();
                     return true;
                 } catch(Exception e) {
                     Console.WriteLine(e.Message);
@@ -47,7 +47,7 @@ namespace Data.Repository {
             }
         }
 
-        public T Find(object id) {
+        public T Find(int id) {
             using(var db = new DatabaseContext()) {
                 try {
                     return db.Set<T>().Find(id);
