@@ -36,7 +36,7 @@ namespace MVC.Controllers
                 }
             }
 
-            return View(estados);
+            return View("Error");
         }
 
         [HttpGet]
@@ -87,6 +87,7 @@ namespace MVC.Controllers
                     {
                         return RedirectToAction("Index");
                     }
+
                 }
             }
 
