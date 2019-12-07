@@ -32,7 +32,7 @@ namespace MVC.Controllers
 
                     paises = JsonConvert.DeserializeObject<List<PaisViewModel>>(responseContent);
 
-                    //return View(paises);
+                    return View(paises);
                 }
             }
 
