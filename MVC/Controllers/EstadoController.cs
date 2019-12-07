@@ -42,7 +42,7 @@ namespace MVC.Controllers
         [HttpGet]
         public async Task<ActionResult> Create()
         {
-            var paises = new List<EstadoViewModel>();
+            var paises = new List<PaisViewModel>();
 
             using (var client = new HttpClient())
             {
@@ -54,13 +54,11 @@ namespace MVC.Controllers
                 {
                     var responseContent = await response.Content.ReadAsStringAsync();
 
-                    paises = JsonConvert.DeserializeObject<List<EstadoViewModel>>(responseContent);
+                    paises = JsonConvert.DeserializeObject<List<PaisViewModel>>(responseContent);
                 }
             }
 
-            ViewBag.Paises = new SelectList(
-                paises
-            );
+            ViewBag.Paises = paises;
 
             return View();
         }

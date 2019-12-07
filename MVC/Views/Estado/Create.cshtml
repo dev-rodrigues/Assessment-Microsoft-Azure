@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Create";
+    var paises = ViewBag.Paises;
 }
 
 <h2>Create</h2>
@@ -34,9 +35,10 @@
         <label class="control-label col-md-2">País</label>
         <div class="col-md-10">
             <select>
-                @foreach(var pais in ViewBag.Paises)
+                <option selected>Selecione o país</option>
+                @foreach(var pais in paises)
                 {
-                    <option value="@pais" name="pais">@pais</option>
+                    <option value="@pais.Id" name="pais">@pais.Name</option>
                 }
             </select>
         </div>
