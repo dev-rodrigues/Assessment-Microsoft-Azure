@@ -1,5 +1,5 @@
 ﻿using Core.Models;
-using Core.Models.State;
+using Core.Models.States;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
