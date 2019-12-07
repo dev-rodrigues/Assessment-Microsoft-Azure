@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Core.Models.States {
     public class State {
+        public State() {
+            
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string URLImage { get; set; }

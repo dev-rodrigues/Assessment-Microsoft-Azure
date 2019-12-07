@@ -9,6 +9,7 @@ namespace Core.Repositories.Countries {
     public interface ICountryRepository {
         IQueryable<Country> Index();
         Country Show(int id);
+        Country Show(string city);
         Country Store(Country model);
         Country Update(Country model);
     }

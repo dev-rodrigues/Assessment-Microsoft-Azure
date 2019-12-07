@@ -49,7 +49,7 @@ namespace Data.Repository {
             }
         }
 
-        public T Find(int id) {
+        public T Find(object id) {
             using(var db = new DatabaseContext()) {
                 try {
                     return db.Set<T>().Find(id);
