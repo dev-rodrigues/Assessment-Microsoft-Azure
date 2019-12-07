@@ -173,14 +173,6 @@
     <Content Include="Views\Country\Details.cshtml" />
     <Content Include="Views\Estado\Index.cshtml" />
     <Content Include="Views\Estado\Create.cshtml" />
-    <Content Include="Views\Estado\Edit.cshtml" />
-    <Content Include="Views\Estado\Delete.cshtml" />
-    <Content Include="Views\Estado\Details.cshtml" />
-    <Content Include="Views\Friend\Index.cshtml" />
-    <Content Include="Views\Friend\Create.cshtml" />
-    <Content Include="Views\Friend\Edit.cshtml" />
-    <Content Include="Views\Friend\Delete.cshtml" />
-    <Content Include="Views\Friend\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

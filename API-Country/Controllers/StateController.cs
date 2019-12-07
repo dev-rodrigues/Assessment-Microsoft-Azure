@@ -21,7 +21,7 @@ using System.Web.UI.WebControls;
 
 namespace API_Country.Controllers {
 
-    [RoutePrefix("api/state")]
+    [RoutePrefix("api/State")]
     public class StateController : ApiController {
 
         private StateRepository GetStateRepository { get; }

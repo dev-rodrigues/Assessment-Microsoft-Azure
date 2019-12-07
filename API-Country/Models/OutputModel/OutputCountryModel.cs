@@ -16,7 +16,7 @@ namespace API_PAISES.Models.OutputModel {
                 OutputStateModel model = new OutputStateModel() {
                     Id = country.Id,
                     Name = country.Name,
-                    IdImage = country.Name
+                    IdImage = country.URLImage
                 };
                 output.Add(model);
             }

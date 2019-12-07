@@ -12,10 +12,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Nome)
+            @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FotoUrl)
+            @Html.DisplayNameFor(model => model.IdImage)
         </th>
         <th></th>
     </tr>
@@ -23,10 +23,10 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Nome)
+            @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            <img src="@Html.DisplayFor(modelItem => item.FotoUrl)" style="max-width:200px;" alt="Alternate Text" />
+            <img src="@Html.DisplayFor(modelItem => item.IdImage)" style="max-width:150px;" alt="img n carregou" />
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

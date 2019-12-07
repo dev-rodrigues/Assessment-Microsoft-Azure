@@ -12,61 +12,67 @@ namespace MVC.Controllers
 {
     public class EstadoController : Controller
     {
-        private string base_url = "http://localhost:58373";
+        private readonly string base_url = "http://localhost:54595";
 
-        // GET: Country
+        // GET: State
         [HttpGet]
         public async Task<ActionResult> Index()
         {
             var estados = new List<EstadoViewModel>();
-            var rj = new EstadoViewModel();
-            var sp = new EstadoViewModel();
-            rj.Id = "1";
-            rj.Nome = "Rio de Janeiro";
-            rj.FotoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Bandeira_do_estado_do_Rio_de_Janeiro.svg/1200px-Bandeira_do_estado_do_Rio_de_Janeiro.svg.png";
 
-            sp.Id = "2";
-            sp.Nome = "Sao Paulo";
-            sp.FotoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Bandeira_do_estado_de_S%C3%A3o_Paulo.svg/275px-Bandeira_do_estado_de_S%C3%A3o_Paulo.svg.png";
-            estados.Add(rj);
-            estados.Add(sp);
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(base_url);
 
-            //var estados = new List<EstadoViewModel>();
+                var response = await client.GetAsync("api/State");
 
-            //using (var client = new HttpClient())
-            //{
-            //    client.BaseAddress = new Uri(base_url);
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContent = await response.Content.ReadAsStringAsync();
 
-            //    var response = await client.GetAsync($"/api/paises");
+                    estados = JsonConvert.DeserializeObject<List<EstadoViewModel>>(responseContent);
 
-            //    if (response.IsSuccessStatusCode)
-            //    {
-            //        var responseContent = await response.Content.ReadAsStringAsync();
-
-            //        estados = JsonConvert.DeserializeObject<List<EstadoViewModel>>(responseContent);
-
-            //        return View(estados);
-            //    }
-            //}
+                    return View(estados);
+                }
+            }
 
             return View(estados);
         }
 
         [HttpGet]
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
+            var paises = new List<EstadoViewModel>();
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(base_url);
+
+                var response = await client.GetAsync("api/Country");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+
+                    paises = JsonConvert.DeserializeObject<List<EstadoViewModel>>(responseContent);
+                }
+            }
+
+            ViewBag.Paises = new SelectList(
+                paises
+            );
+
             return View();
         }
 
         [HttpPost]
         public async Task<ActionResult> Create(FormCollection collection)
         {
-            var novoPais = new EstadoViewModel();
-
             var data = new Dictionary<string, string>
             {
-                {"Nome", collection["Nome"]},
-                {"FotoUrl", collection["FotoUrl"]}
+                {"Name", collection["Name"]},
+                {"IdImage", collection["IdImage"]},
+                //{"Pais", collection["pais"] }
             };
 
             using (var client = new HttpClient())
@@ -75,7 +81,7 @@ namespace MVC.Controllers
 
                 using (var requestContent = new FormUrlEncodedContent(data))
                 {
-                    var response = await client.PostAsync("api/create/pais", requestContent);
+                    var response = await client.PostAsync("api/State", requestContent);
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -83,6 +89,7 @@ namespace MVC.Controllers
                     }
                 }
             }
+
             return View();
         }
 
@@ -95,28 +102,29 @@ namespace MVC.Controllers
             {
                 client.BaseAddress = new Uri(base_url);
 
-                var response = await client.GetAsync($"api/Country/{id}");
+                var response = await client.GetAsync($"api/State/{id}");
 
                 if (response.IsSuccessStatusCode)
                 {
                     var responseContent = await response.Content.ReadAsStringAsync();
 
-                    estado = JsonConvert.DeserializeObject<EstadoViewModel>(responseContent);
+                    var estadoContent = JsonConvert.DeserializeObject<EstadoViewModel>(responseContent);
 
                     return View(estado);
                 }
             }
 
             return View();
+
         }
 
-        [HttpPut]
+        [HttpPost]
         public async Task<ActionResult> Edit(FormCollection collection, string id)
         {
             var data = new Dictionary<string, string>
             {
-                {"Nome", collection["Nome"]},
-                {"FotoUrl", collection["FotoUrl"]}
+                {"Name", collection["Name"]},
+                {"IdImage", collection["IdImage"]}
             };
 
             using (var client = new HttpClient())
@@ -125,7 +133,7 @@ namespace MVC.Controllers
 
                 using (var requestContent = new FormUrlEncodedContent(data))
                 {
-                    var response = await client.PutAsync("Api/Account/update", requestContent);
+                    var response = await client.PutAsync($"api/State/{id}", requestContent);
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -139,7 +147,6 @@ namespace MVC.Controllers
             }
         }
 
-
         [HttpGet]
         public async Task<ActionResult> Delete(string id)
         {
@@ -149,7 +156,7 @@ namespace MVC.Controllers
             {
                 client.BaseAddress = new Uri(base_url);
 
-                var response = await client.GetAsync($"api/Country/{id}");
+                var response = await client.GetAsync($"api/State/{id}");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -165,13 +172,13 @@ namespace MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Delete(string id, FormCollection collection)
+        public async Task<ActionResult> Delete(string id, FormCollection form)
         {
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(base_url);
 
-                var response = await client.GetAsync($"Api/delete{id}");
+                var response = await client.DeleteAsync($"api/State/{id}");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -193,7 +200,7 @@ namespace MVC.Controllers
             {
                 client.BaseAddress = new Uri(base_url);
 
-                var response = await client.GetAsync($"api/Country/{id}");
+                var response = await client.GetAsync($"api/State/{id}");
 
                 if (response.IsSuccessStatusCode)
                 {
