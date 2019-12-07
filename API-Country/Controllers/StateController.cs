@@ -3,7 +3,7 @@ using API_PAISES.Models.InputModel;
 using API_PAISES.Models.OutputModel;
 using Core;
 using Core.Models;
-using Core.Models.State;
+using Core.Models.States;
 using Core.Repositories.Countries;
 using Core.Repositories.States;
 using Data.Repository;
@@ -25,9 +25,11 @@ namespace API_Country.Controllers {
     public class StateController : ApiController {
 
         private StateRepository GetStateRepository { get; }
+        private CountryRepository GetCountryRepository { get; }
 
         public StateController() {
             this.GetStateRepository = new StateRepository();
+            this.GetCountryRepository = new CountryRepository();
         }
 
         [HttpGet]
@@ -54,11 +56,19 @@ namespace API_Country.Controllers {
 
         [HttpPost]
         public IHttpActionResult Store(InputStateModel input) {
+            var localized_country = GetCountryRepository.Find(input.Id_Country);
+
+            if(localized_country == null) {
+                return BadRequest("País não informado");
+            }
+
             var new_state = new InputStateModel().CreateState(input);
+            new_state.Country = localized_country;
+
             var saved_state = GetStateRepository.Save(new_state);
-            var output_saved_state = new OutputStateModel().state(saved_state);
 
             if(saved_state != null) {
+                var output_saved_state = new OutputStateModel().state(saved_state);
                 return CreatedAtRoute("DefaultApi", new { id = output_saved_state.Id }, output_saved_state);
             }
             return BadRequest("Erro ao processar a solicitação");

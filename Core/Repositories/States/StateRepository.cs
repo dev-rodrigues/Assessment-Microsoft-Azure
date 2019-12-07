@@ -1,5 +1,5 @@
 ﻿using Core.Models;
-using Core.Models.State;
+using Core.Models.States;
 using Core.Repositories.Countries;
 using Data.Repository;
 using System;

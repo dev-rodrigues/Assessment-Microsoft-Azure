@@ -1,4 +1,4 @@
-﻿using Core.Models.State;
+﻿using Core.Models.States;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +8,7 @@ namespace API_estados.Models.InputModel {
     public class InputStateModel {
         public string Name { get; set; }
         public string IdImage { get; set; }
+        public int Id_Country { get; set; }
 
         public State CreateState(InputStateModel input) {
             return new State() {

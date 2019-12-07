@@ -1,5 +1,5 @@
 ﻿using Core.Models;
-using Core.Models.State;
+using Core.Models.States;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,25 +11,45 @@ namespace API_PAISES.Models.OutputModel {
         public string Name { get; set; }
         public string IdImage { get; set; }
 
+        public OutputCountryModel CountryModel { get; set; }
+
         public List<OutputStateModel> states(List<State> states) {
             List<OutputStateModel> output = new List<OutputStateModel>();
             foreach(State state in states) {
                 OutputStateModel model = new OutputStateModel() {
                     Id = state.Id,
                     Name = state.Name,
-                    IdImage = state.URLImage
+                    IdImage = state.URLImage,
                 };
+
+                OutputCountryModel country = new OutputCountryModel() {
+                    Id = state.Country.Id,
+                    Name = state.Country.Name,
+                    IdImage = state.Country.URLImage
+                };
+
+                model.CountryModel = country;
+
                 output.Add(model);
             }
             return output;
         }
 
         public OutputStateModel state(State state) {
-            return new OutputStateModel() {
+            var output = new OutputStateModel() {
                 Id = state.Id,
                 Name = state.Name,
                 IdImage = state.URLImage
             };
+
+            OutputCountryModel country = new OutputCountryModel() {
+                Id = state.Country.Id,
+                Name = state.Country.Name,
+                IdImage = state.Country.URLImage
+            };
+
+            output.CountryModel = country;
+            return output;
         }
     }
 }
