@@ -24,8 +24,8 @@ namespace API_Country.Controllers {
     [RoutePrefix("api/State")]
     public class StateController : ApiController {
 
-        private StateRepository GetStateRepository { get; }
-        private CountryRepository GetCountryRepository { get; }
+        private StateRepository GetStateRepository { get; set; }
+        private CountryRepository GetCountryRepository { get; set; }
 
         public StateController() {
             this.GetStateRepository = new StateRepository();
@@ -35,6 +35,7 @@ namespace API_Country.Controllers {
         [HttpGet]
         public IHttpActionResult Index() {
 
+            //var states = GetStateRepository.Index().ToList<State>();
             var states = GetStateRepository.Index().ToList<State>();
 
             if(states != null) {
@@ -46,7 +47,7 @@ namespace API_Country.Controllers {
 
         [HttpGet]
         public IHttpActionResult Show(int id) {
-            var localized_state = GetStateRepository.Show(id);
+            var localized_state = GetStateRepository.BuscarPorId(id);
             if(localized_state != null) {
                 var converted_state = new OutputStateModel().state(localized_state);
                 return Ok(converted_state);
@@ -56,7 +57,7 @@ namespace API_Country.Controllers {
 
         [HttpPost]
         public IHttpActionResult Store(InputStateModel input) {
-            var localized_country = GetCountryRepository.Find(input.Id_Country);
+            var localized_country = GetCountryRepository.buscarPorId(input.Id_Country);
 
             if(localized_country == null) {
                 return BadRequest("País não informado");
@@ -65,7 +66,11 @@ namespace API_Country.Controllers {
             var new_state = new InputStateModel().CreateState(input);
             new_state.Country = localized_country;
 
-            var saved_state = GetStateRepository.Save(new_state);
+            //localized_country.States.Add(new_state);
+
+            var saved_state = GetStateRepository.Store(new_state);
+
+            //GetCountryRepository.Update(localized_country);
 
             if(saved_state != null) {
                 var output_saved_state = new OutputStateModel().state(saved_state);

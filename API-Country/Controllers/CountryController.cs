@@ -61,7 +61,8 @@ namespace API_PAISES.Controllers {
         [HttpPost]
         public IHttpActionResult Store(InputCountryModel input) {
             var new_country = new InputCountryModel().CreateCountry(input);
-            var saved_country = GetCountryRepository.Save(new_country);
+            var saved_country = GetCountryRepository.Store(new_country);
+
             var output_saved_country = new OutputCountryModel().country(saved_country);
 
             if(saved_country != null) {

@@ -28,3 +28,9 @@ where					(1=1)
 			and			s.Name like @city
 return 0
 ```
+
+## Para atualizar o banco de dados
+```
+Ferramentas > Gerenciados de Pacotes do NuGet > Console do Gerenciador de Pacotes
+Executar o comando `Update-Database`
+```

@@ -34,7 +34,7 @@ namespace Core.Repositories.Countries {
                         Id = Convert.ToInt32(dr["Id"]),
                         Name = dr["Name"].ToString(),
                         URLImage = dr["URLImage"].ToString(),
-                        States = null
+                        //States = null
                     };
                     return obj;
                 }
@@ -44,6 +44,12 @@ namespace Core.Repositories.Countries {
 
         public Country Show(int id) {
             return base.Find(id);
+        }
+
+        public Country buscarPorId(int id) {
+            using(var conn = new DatabaseContext()) {
+                return (Country) conn.Countries.Find(id);
+            }
         }
 
 

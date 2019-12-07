@@ -63,6 +63,7 @@ namespace Data.Repository {
         public IQueryable<T> FindAll() {
             using(var db = new DatabaseContext()) {
                 try {
+                    
                     return context.Set<T>();
                 } catch(Exception e) {
                     Console.WriteLine(e.Message);

@@ -29,6 +29,14 @@ namespace Core.Repositories.States {
             return lista;
         }
 
+        public List<State> Listar() {
+            return base.FindAll().ToList<State>();
+        }
+
+        public State BuscarPorId(int id) {
+            return base.Find(id);
+        }
+
         public State Show(int id) {
 
             using(SqlConnection conn = new SqlConnection(connection_string)) {
