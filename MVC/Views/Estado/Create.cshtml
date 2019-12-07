@@ -1,8 +1,7 @@
-﻿@model MVC.Models.EstadoViewModel
+﻿@model MVC.Models.CreateEstadoViewModel
 
 @{
     ViewBag.Title = "Create";
-    var paises = ViewBag.Paises;
 }
 
 <h2>Create</h2>
@@ -14,29 +13,27 @@
     
 <div class="form-horizontal">
     <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
-        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.Estado.Name, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.Estado.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Estado.Name, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.IdImage, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.Estado.IdImage, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.IdImage, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.IdImage, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.Estado.IdImage, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Estado.IdImage, "", new { @class = "text-danger" })
         </div>
     </div>
-
     <div class="form-group">
         <label class="control-label col-md-2">País</label>
         <div class="col-md-10">
             <select>
                 <option selected>Selecione o país</option>
-                @foreach(var pais in paises)
+                @foreach (var pais in Model.Paises)
                 {
                     <option value="@pais.Id" name="pais">@pais.Name</option>
                 }
@@ -44,6 +41,8 @@
         </div>
     </div>
 
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Create" class="btn btn-default" />

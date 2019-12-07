@@ -43,6 +43,7 @@ namespace MVC.Controllers
         public async Task<ActionResult> Create()
         {
             var paises = new List<PaisViewModel>();
+            CreateEstadoViewModel estado = new CreateEstadoViewModel();
 
             using (var client = new HttpClient())
             {
@@ -55,12 +56,14 @@ namespace MVC.Controllers
                     var responseContent = await response.Content.ReadAsStringAsync();
 
                     paises = JsonConvert.DeserializeObject<List<PaisViewModel>>(responseContent);
+
+                    estado.Paises = paises;
+
+                    return View(estado);
                 }
             }
-
-            ViewBag.Paises = paises;
-
             return View();
+
         }
 
         [HttpPost]

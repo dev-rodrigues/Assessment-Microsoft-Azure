@@ -34,9 +34,16 @@
         <td>
             <select>
                 <option selected>Estados</option>
-                @foreach (var estado in item.Estados)
+                @if(item.Estados != null)
                 {
-                    <option>@estado.Name</option>
+                    foreach (var estado in item.Estados)
+                    {
+                        <option>@estado.Name</option>
+                    }
+                }
+                else
+                {
+                    <option>Nenhum estado cadastrado</option>
                 }
             </select>
         </td>

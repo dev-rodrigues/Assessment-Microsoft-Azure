@@ -127,6 +127,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CreateEstadoViewModel.cs" />
     <Compile Include="Models\EstadoViewModel.cs" />
     <Compile Include="Models\FriendViewModel.cs" />
     <Compile Include="Models\PaisViewModel.cs" />
@@ -172,10 +173,10 @@
     <Content Include="Views\Country\Delete.cshtml" />
     <Content Include="Views\Country\Details.cshtml" />
     <Content Include="Views\Estado\Index.cshtml" />
-    <Content Include="Views\Estado\Create.cshtml" />
     <Content Include="Views\Estado\Edit.cshtml" />
     <Content Include="Views\Estado\Delete.cshtml" />
     <Content Include="Views\Estado\Details.cshtml" />
+    <Content Include="Views\Estado\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
