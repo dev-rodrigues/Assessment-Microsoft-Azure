@@ -25,6 +25,20 @@
             @Html.DisplayFor(model => model.IdImage)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Estados)
+        </dt>
+
+        <dd>
+            <select>
+                <option selected>Estados</option>
+                @foreach (var estado in Model.Estados)
+                {
+                    <option>@estado.Name</option>
+                }
+            </select>
+        </dd>
+
     </dl>
 </div>
 <p>

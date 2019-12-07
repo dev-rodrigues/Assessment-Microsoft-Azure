@@ -17,6 +17,9 @@
         <th>
             @Html.DisplayNameFor(model => model.IdImage)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estados)
+        </th>
         <th></th>
     </tr>
 
@@ -29,9 +32,18 @@
             <img src="@Html.DisplayFor(modelItem => item.IdImage)" style="max-width:150px;" alt="img n carregou" />
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            <select>
+                <option selected>Estados</option>
+                @foreach (var estado in item.Estados)
+                {
+                    <option>@estado.Name</option>
+                }
+            </select>
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>
     </tr>
 }

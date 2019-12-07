@@ -70,7 +70,7 @@ namespace MVC.Controllers
             {
                 {"Name", collection["Name"]},
                 {"IdImage", collection["IdImage"]},
-                //{"Pais", collection["pais"] }
+                {"Pais", collection["pais"] } 
             };
 
             using (var client = new HttpClient())
@@ -85,7 +85,6 @@ namespace MVC.Controllers
                     {
                         return RedirectToAction("Index");
                     }
-
                 }
             }
 
@@ -96,6 +95,7 @@ namespace MVC.Controllers
         public async Task<ActionResult> Edit(string id)
         {
             EstadoViewModel estado = new EstadoViewModel();
+            List<PaisViewModel> paises = new List<PaisViewModel>();
 
             using (var client = new HttpClient())
             {
@@ -112,6 +112,22 @@ namespace MVC.Controllers
                     return View(estado);
                 }
             }
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(base_url);
+
+                var response = await client.GetAsync("api/Country");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+
+                    paises = JsonConvert.DeserializeObject<List<PaisViewModel>>(responseContent);
+                }
+            }
+
+            ViewBag.Paises = paises;
 
             return View();
 
