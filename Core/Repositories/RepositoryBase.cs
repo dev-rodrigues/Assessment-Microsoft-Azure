@@ -27,7 +27,7 @@ namespace Data.Repository {
             using(var db = new DatabaseContext()) {
                 try {
                     db.Entry(model).State = System.Data.Entity.EntityState.Modified;
-                    db.SaveChangesAsync();
+                    db.SaveChanges();
                     return model;
                 } catch(Exception e) {
                     Console.WriteLine(e.Message);

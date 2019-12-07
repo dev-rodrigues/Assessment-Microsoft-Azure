@@ -24,7 +24,7 @@ namespace API_PAISES.Models.OutputModel {
             return output;
         }
 
-        public OutputStateModel country(State state) {
+        public OutputStateModel state(State state) {
             return new OutputStateModel() {
                 Id = state.Id,
                 Name = state.Name,

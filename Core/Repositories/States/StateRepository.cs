@@ -15,7 +15,7 @@ namespace Core.Repositories.States {
             return lista;
         }
 
-        public State Show(State model, int id) {
+        public State Show(int id) {
             return base.Find(id);
         }
 

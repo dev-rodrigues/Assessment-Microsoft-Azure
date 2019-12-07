@@ -1,4 +1,5 @@
-﻿using API_PAISES.Models.InputModel;
+﻿using API_estados.Models.InputModel;
+using API_PAISES.Models.InputModel;
 using API_PAISES.Models.OutputModel;
 using Core;
 using Core.Models;
@@ -39,6 +40,53 @@ namespace API_Country.Controllers {
                 return Ok(converted);
             }
             return BadRequest("Erro ao processar a solicitação");
+        }
+
+        [HttpGet]
+        public IHttpActionResult Show(int id) {
+            var localized_state = GetStateRepository.Show(id);
+            if(localized_state != null) {
+                var converted_state = new OutputStateModel().state(localized_state);
+                return Ok(converted_state);
+            }
+            return BadRequest("Erro ao processar a solicitação.");
+        }
+
+        [HttpPost]
+        public IHttpActionResult Store(InputStateModel input) {
+            var new_state = new InputStateModel().CreateState(input);
+            var saved_state = GetStateRepository.Save(new_state);
+            var output_saved_state = new OutputStateModel().state(saved_state);
+
+            if(saved_state != null) {
+                return CreatedAtRoute("DefaultApi", new { id = output_saved_state.Id }, output_saved_state);
+            }
+            return BadRequest("Erro ao processar a solicitação");
+        }
+
+        [HttpPut]
+        public IHttpActionResult Update(int id, InputStateModel input) {
+            var localized_state = GetStateRepository.Show(id);
+            localized_state.Name = input.Name;
+            localized_state.URLImage = input.IdImage;
+
+            var updated_state = GetStateRepository.Update(localized_state);
+
+            if(updated_state != null) {
+                var output_updated_country = new OutputStateModel().state(updated_state);
+                return Ok(output_updated_country);
+            }
+            return BadRequest("Erro ao processar a solicitação");
+        }
+
+        [HttpDelete]
+        public IHttpActionResult Destroy(int id) {
+            var localized_state = GetStateRepository.Show(id);
+            if(localized_state != null) {
+                GetStateRepository.Delete(localized_state);
+                return Ok();
+            }
+            return BadRequest();
         }
     }
 }

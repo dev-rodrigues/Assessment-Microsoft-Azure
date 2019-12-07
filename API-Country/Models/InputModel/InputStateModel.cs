@@ -5,11 +5,11 @@ using System.Linq;
 using System.Web;
 
 namespace API_estados.Models.InputModel {
-    public class InputEstadoModel {
+    public class InputStateModel {
         public string Name { get; set; }
         public string IdImage { get; set; }
 
-        public State CreateCountry(InputEstadoModel input) {
+        public State CreateState(InputStateModel input) {
             return new State() {
                 Name = input.Name,
                 URLImage = SetIdImage(input.IdImage)
