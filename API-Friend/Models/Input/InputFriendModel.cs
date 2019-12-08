@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Application.Models.Friends;
+using Application.Models.Territory.Countries;
+using Application.Models.Territory.States;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,5 +16,16 @@ namespace API_Friend.Models.Input {
 
         public int IdCountry { get; set; }
         public int IdState { get; set; }
+
+        public static Friend CreateFriend(InputFriendModel input, Country country, State state) {
+            return new Friend() {
+                Name = input.Name,
+                LastName = input.LastName,
+                Telephone = input.Telephone,
+                Email = input.Email,
+                BirthDate = Convert.ToDateTime(input.BirthDate),
+
+            };
+        }
     }
 }
