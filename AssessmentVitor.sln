@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API-Country", "API-Country\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{79920A3D-EF4A-4479-AEA7-E539FCE8F849}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API-Friend", "API-Friend\API-Friend.csproj", "{6E28FEFC-C745-4814-8246-6A6FCA68D2A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,12 +31,17 @@ Global
 		{79920A3D-EF4A-4479-AEA7-E539FCE8F849}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79920A3D-EF4A-4479-AEA7-E539FCE8F849}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79920A3D-EF4A-4479-AEA7-E539FCE8F849}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E28FEFC-C745-4814-8246-6A6FCA68D2A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E28FEFC-C745-4814-8246-6A6FCA68D2A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E28FEFC-C745-4814-8246-6A6FCA68D2A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E28FEFC-C745-4814-8246-6A6FCA68D2A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D571CC3A-5FB8-4DA8-8680-D8CC5BC0A122} = {D3A32D29-AFFF-4B2E-8A1C-8387F8B9153E}
+		{6E28FEFC-C745-4814-8246-6A6FCA68D2A1} = {D3A32D29-AFFF-4B2E-8A1C-8387F8B9153E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {95FC869D-BB5C-42DE-AF2E-D037E9EB0D14}

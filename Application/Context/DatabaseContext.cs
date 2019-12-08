@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using Application.Models.Friends;
 using Application.Models.Territory.Countries;
 using Application.Models.Territory.States;
 
@@ -10,6 +11,10 @@ namespace Application.Database {
         }
 
         public DbSet<Country> Countries {
+            get; set;
+        }
+
+        public DbSet<Friend> Friends {
             get; set;
         }
 

@@ -77,7 +77,16 @@
     <Compile Include="Migrations\201912080427536_Atualizacao4.designer.cs">
       <DependentUpon>201912080427536_Atualizacao4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912082007175_Friends.cs" />
+    <Compile Include="Migrations\201912082007175_Friends.designer.cs">
+      <DependentUpon>201912082007175_Friends.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912082019413_Friends1.cs" />
+    <Compile Include="Migrations\201912082019413_Friends1.designer.cs">
+      <DependentUpon>201912082019413_Friends1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Friends\Friend.cs" />
     <Compile Include="Models\Territory\Countries\Country.cs" />
     <Compile Include="Models\Territory\States\State.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,6 +119,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912080427536_Atualizacao4.resx">
       <DependentUpon>201912080427536_Atualizacao4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912082007175_Friends.resx">
+      <DependentUpon>201912082007175_Friends.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912082019413_Friends1.resx">
+      <DependentUpon>201912082019413_Friends1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
