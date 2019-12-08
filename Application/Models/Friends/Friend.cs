@@ -29,5 +29,6 @@ namespace Application.Models.Friends {
         [ForeignKey("State")]
         public int StateId { get; set; }
         public virtual State State { get; set; }
+
     }
 }

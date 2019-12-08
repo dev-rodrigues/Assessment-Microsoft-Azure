@@ -74,5 +74,29 @@ namespace API_Friend.Controllers {
             return BadRequest("Erro ao processar a solicitação");
         }
 
+        [HttpPut]
+        public async Task<IHttpActionResult> Update(int id_user, InputFriendModel inputFriend) {
+            var localized_friend = await GetFriendRepository.Find(id_user);
+            var country = await GetCountryRepository.Find(inputFriend.IdCountry);
+            var state = await GetStateRepository.Find(inputFriend.IdState);
+
+            if(localized_friend == null || country == null || state == null) {
+                return BadRequest("Erro ao processar a solicitação");
+            }
+
+            localized_friend.Name = inputFriend.Name;
+            localized_friend.LastName = inputFriend.LastName;
+            localized_friend.Email = inputFriend.Email;
+            localized_friend.BirthDate = Convert.ToDateTime(inputFriend.BirthDate);
+            localized_friend.Country = country;
+            localized_friend.State = state;
+
+            var updated_friend = await GetFriendRepository.Update(localized_friend);
+            if(updated_friend != null) {
+                var converted_updated_friend = OutputFriendModel.CreateOutputFriend(updated_friend);
+                return Ok(converted_updated_friend);
+            }
+            return BadRequest("Erro ao processar a solicitação");
+        }
     }
 }
