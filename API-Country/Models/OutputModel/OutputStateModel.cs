@@ -32,7 +32,7 @@ namespace API_PAISES.Models.OutputModel {
         //    return output;
         //}
 
-        public List<OutputStateModel> States(ICollection<State> states) {
+        public List<OutputStateModel> OutputStates(ICollection<State> states) {
             List<OutputStateModel> output = new List<OutputStateModel>();
             foreach(State state in states) {
                 OutputStateModel model = new OutputStateModel() {
@@ -52,7 +52,7 @@ namespace API_PAISES.Models.OutputModel {
             return output;
         }
 
-        public OutputStateModel state(State state) {
+        public OutputStateModel OutputState(State state) {
             var output = new OutputStateModel() {
                 Id = state.Id,
                 Name = state.Name,

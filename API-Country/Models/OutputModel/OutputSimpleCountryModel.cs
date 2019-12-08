@@ -19,7 +19,7 @@ namespace API_Country.Models.OutputModel {
                     Id = obj.Id,
                     Name = obj.Name,
                     IdImage = obj.UrlPicture,
-                    States = new OutputSimpleStateModel().States(obj.States)
+                    States = new OutputSimpleStateModel().OutputStates(obj.States)
                 };
                 output.Add(country);
             }
@@ -31,7 +31,7 @@ namespace API_Country.Models.OutputModel {
                 Id = country.Id,
                 Name = country.Name,
                 IdImage = country.UrlPicture,
-                States = new OutputSimpleStateModel().States(country.States)
+                States = new OutputSimpleStateModel().OutputStates(country.States)
             };
             return output;
         }

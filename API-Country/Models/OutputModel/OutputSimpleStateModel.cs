@@ -10,7 +10,7 @@ namespace API_Country.Models.OutputModel {
         public string Name { get; set; }
         public string IdImage { get; set; }
 
-        public List<OutputSimpleStateModel> States(ICollection<State> states) {
+        public List<OutputSimpleStateModel> OutputStates(ICollection<State> states) {
             List<OutputSimpleStateModel> output = new List<OutputSimpleStateModel>();
             if(states != null) {
                 foreach(State state in states) {

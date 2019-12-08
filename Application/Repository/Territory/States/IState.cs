@@ -9,5 +9,8 @@ namespace Application.Repository.Territory.States {
     public interface IState {
         Task<State> Save(State state);
         Task<State> Find(int id);
+        Task<State> Update(State country);
+        Task<bool> Delete(State country);
+        List<State> Index();
     }
 }

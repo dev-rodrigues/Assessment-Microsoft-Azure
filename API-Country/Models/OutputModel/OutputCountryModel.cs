@@ -23,7 +23,7 @@ namespace API_PAISES.Models.OutputModel {
                     Id = country.Id,
                     IdImage = country.UrlPicture,
                     Name = country.Name,
-                    OutPutStates = new OutputStateModel().States(country.States)
+                    OutPutStates = new OutputStateModel().OutputStates(country.States)
                 };
                 output.Add(output_country);
             }
