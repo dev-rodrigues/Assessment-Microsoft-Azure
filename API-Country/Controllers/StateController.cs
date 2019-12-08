@@ -1,12 +1,9 @@
 ﻿using API_estados.Models.InputModel;
 using API_PAISES.Models.InputModel;
 using API_PAISES.Models.OutputModel;
-using Core;
-using Core.Models;
-using Core.Models.States;
-using Core.Repositories.Countries;
-using Core.Repositories.States;
-using Data.Repository;
+using Application.Repository.Territory.Countries;
+using Application.Repository.Territory.States;
+using Application.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,30 +21,31 @@ namespace API_Country.Controllers {
     [RoutePrefix("api/State")]
     public class StateController : ApiController {
 
-        private StateRepository GetStateRepository { get; set; }
-        private CountryRepository GetCountryRepository { get; set; }
+        private IState GetStateRepository { get; set; }
+        private ICountry GetCountryRepository { get; set; }
 
         public StateController() {
-            this.GetStateRepository = new StateRepository();
-            this.GetCountryRepository = new CountryRepository();
+            this.GetStateRepository = Locator.GetInstanceOf<StateRepository>();
+            this.GetCountryRepository = Locator.GetInstanceOf<CountryRepository>();
         }
 
+        //    [HttpGet]
+        //    public IHttpActionResult Index() {
+
+        //        //var states = GetStateRepository.Index().ToList<State>();
+        //        var states = GetStateRepository.Index().ToList<State>();
+
+        //        if(states != null) {
+        //            var converted = new OutputStateModel().states(states);
+        //            return Ok(converted);
+        //        }
+        //        return BadRequest("Erro ao processar a solicitação");
+        //    }
+
         [HttpGet]
-        public IHttpActionResult Index() {
+        public async Task<IHttpActionResult> Show(int id) {
+            var localized_state = await GetStateRepository.Find(id);
 
-            //var states = GetStateRepository.Index().ToList<State>();
-            var states = GetStateRepository.Index().ToList<State>();
-
-            if(states != null) {
-                var converted = new OutputStateModel().states(states);
-                return Ok(converted);
-            }
-            return BadRequest("Erro ao processar a solicitação");
-        }
-
-        [HttpGet]
-        public IHttpActionResult Show(int id) {
-            var localized_state = GetStateRepository.BuscarPorId(id);
             if(localized_state != null) {
                 var converted_state = new OutputStateModel().state(localized_state);
                 return Ok(converted_state);
@@ -56,8 +54,8 @@ namespace API_Country.Controllers {
         }
 
         [HttpPost]
-        public IHttpActionResult Store(InputStateModel input) {
-            var localized_country = GetCountryRepository.buscarPorId(input.Id_Country);
+        public async Task<IHttpActionResult> Store(InputStateModel input) {
+            var localized_country = await GetCountryRepository.Find(input.Id_Country);
 
             if(localized_country == null) {
                 return BadRequest("País não informado");
@@ -68,7 +66,7 @@ namespace API_Country.Controllers {
 
             //localized_country.States.Add(new_state);
 
-            var saved_state = GetStateRepository.Store(new_state);
+            var saved_state = await GetStateRepository.Save(new_state);
 
             //GetCountryRepository.Update(localized_country);
 
@@ -79,29 +77,29 @@ namespace API_Country.Controllers {
             return BadRequest("Erro ao processar a solicitação");
         }
 
-        [HttpPut]
-        public IHttpActionResult Update(int id, InputStateModel input) {
-            var localized_state = GetStateRepository.Show(id);
-            localized_state.Name = input.Name;
-            localized_state.URLImage = input.IdImage;
+        //    [HttpPut]
+        //    public IHttpActionResult Update(int id, InputStateModel input) {
+        //        var localized_state = GetStateRepository.Show(id);
+        //        localized_state.Name = input.Name;
+        //        localized_state.URLImage = input.IdImage;
 
-            var updated_state = GetStateRepository.Update(localized_state);
+        //        var updated_state = GetStateRepository.Update(localized_state);
 
-            if(updated_state != null) {
-                var output_updated_country = new OutputStateModel().state(updated_state);
-                return Ok(output_updated_country);
-            }
-            return BadRequest("Erro ao processar a solicitação");
-        }
+        //        if(updated_state != null) {
+        //            var output_updated_country = new OutputStateModel().state(updated_state);
+        //            return Ok(output_updated_country);
+        //        }
+        //        return BadRequest("Erro ao processar a solicitação");
+        //    }
 
-        [HttpDelete]
-        public IHttpActionResult Destroy(int id) {
-            var localized_state = GetStateRepository.Show(id);
-            if(localized_state != null) {
-                GetStateRepository.Delete(localized_state);
-                return Ok();
-            }
-            return BadRequest();
-        }
+        //    [HttpDelete]
+        //    public IHttpActionResult Destroy(int id) {
+        //        var localized_state = GetStateRepository.Show(id);
+        //        if(localized_state != null) {
+        //            GetStateRepository.Delete(localized_state);
+        //            return Ok();
+        //        }
+        //        return BadRequest();
+        //    }
     }
 }

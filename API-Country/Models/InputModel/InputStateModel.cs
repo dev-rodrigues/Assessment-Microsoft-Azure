@@ -1,4 +1,4 @@
-﻿using Core.Models.States;
+﻿using Application.Models.Territory.States;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ namespace API_estados.Models.InputModel {
         public State CreateState(InputStateModel input) {
             return new State() {
                 Name = input.Name,
-                URLImage = SetIdImage(input.IdImage)
+                UrlPicture = SetIdImage(input.IdImage)
             };
         }
 

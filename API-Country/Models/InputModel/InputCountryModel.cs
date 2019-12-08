@@ -1,4 +1,4 @@
-﻿using Core.Models;
+﻿using Application.Models.Territory.Countries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,7 @@ namespace API_PAISES.Models.InputModel {
         public Country CreateCountry(InputCountryModel input) {
             return new Country() {
                 Name = input.Name,
-                URLImage = SetIdImage(input.IdImage)
+                UrlPicture = SetIdImage(input.IdImage)
             };
         }
 

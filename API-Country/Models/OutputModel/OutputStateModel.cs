@@ -1,5 +1,4 @@
-﻿using Core.Models;
-using Core.Models.States;
+﻿using Application.Models.Territory.States;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,13 +18,13 @@ namespace API_PAISES.Models.OutputModel {
                 OutputStateModel model = new OutputStateModel() {
                     Id = state.Id,
                     Name = state.Name,
-                    IdImage = state.URLImage,
+                    IdImage = state.UrlPicture,
                 };
 
                 OutputCountryModel country = new OutputCountryModel() {
                     Id = state.Country.Id,
                     Name = state.Country.Name,
-                    IdImage = state.Country.URLImage
+                    IdImage = state.Country.UrlPicture
                 };
 
                 model.CountryModel = country;
@@ -39,13 +38,13 @@ namespace API_PAISES.Models.OutputModel {
             var output = new OutputStateModel() {
                 Id = state.Id,
                 Name = state.Name,
-                IdImage = state.URLImage
+                IdImage = state.UrlPicture
             };
 
             OutputCountryModel country = new OutputCountryModel() {
                 Id = state.Country.Id,
                 Name = state.Country.Name,
-                IdImage = state.Country.URLImage
+                IdImage = state.Country.UrlPicture
             };
 
             output.CountryModel = country;
