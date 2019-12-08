@@ -11,7 +11,7 @@ namespace API_Country.Models.OutputModel {
             this.States = new List<OutputSimpleStateModel>();
         }
 
-        public List<OutputSimpleCountryModel> Convert(List<Country> countries) {
+        public static List<OutputSimpleCountryModel> Convert(List<Country> countries) {
             List<OutputSimpleCountryModel> output = new List<OutputSimpleCountryModel>();
 
             foreach(var obj in countries) {
@@ -26,7 +26,7 @@ namespace API_Country.Models.OutputModel {
             return output;
         }
 
-        public OutputSimpleCountryModel Convert(Country country) {
+        public static OutputSimpleCountryModel Convert(Country country) {
             var output = new OutputSimpleCountryModel() {
                 Id = country.Id,
                 Name = country.Name,

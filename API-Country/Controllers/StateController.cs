@@ -1,7 +1,6 @@
 ﻿using API_Country.Models.OutputModel;
 using API_estados.Models.InputModel;
 using API_PAISES.Models.InputModel;
-using API_PAISES.Models.OutputModel;
 using Application.Repository.Territory.Countries;
 using Application.Repository.Territory.States;
 using Application.Service;
@@ -41,16 +40,16 @@ namespace API_Country.Controllers {
             return BadRequest("Erro ao processar a solicitação");
         }
 
-        //[HttpGet]
-        //public async Task<IHttpActionResult> Show(int id) {
-        //    var localized_state = await GetStateRepository.Find(id);
+        [HttpGet]
+        public async Task<IHttpActionResult> Show(int id) {
+            var localized_state = await GetStateRepository.Find(id);
 
-        //    if(localized_state != null) {
-        //        var converted_state = new OutputStateModel().state(localized_state);
-        //        return Ok(converted_state);
-        //    }
-        //    return BadRequest("Erro ao processar a solicitação.");
-        //}
+            if(localized_state != null) {
+                var converted_state = OutputStateModel.ConvertState(localized_state);
+                return Ok(converted_state);
+            }
+            return BadRequest("Erro ao processar a solicitação.");
+        }
 
         //[HttpPost]
         //public async Task<IHttpActionResult> Store(InputStateModel input) {
