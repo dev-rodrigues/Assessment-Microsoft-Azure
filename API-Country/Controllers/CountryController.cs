@@ -48,10 +48,21 @@ namespace API_PAISES.Controllers {
             return BadRequest("Erro ao processar a solicitação.");
         }
 
+        [HttpGet]
+        public IHttpActionResult Show(string name) {
+            var localized_country = GetCountryRepository.Show(name);
+            if(localized_country != null) {
+                var converted_country = new OutputCountryModel().country(localized_country);
+                return Ok(converted_country);
+            }
+            return BadRequest("Erro ao processar a solicitação.");
+        }
+
         [HttpPost]
         public IHttpActionResult Store(InputCountryModel input) {
             var new_country = new InputCountryModel().CreateCountry(input);
-            var saved_country = GetCountryRepository.Save(new_country);
+            var saved_country = GetCountryRepository.Store(new_country);
+
             var output_saved_country = new OutputCountryModel().country(saved_country);
 
             if(saved_country != null) {
