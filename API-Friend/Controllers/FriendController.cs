@@ -98,5 +98,18 @@ namespace API_Friend.Controllers {
             }
             return BadRequest("Erro ao processar a solicitação");
         }
+
+        [HttpDelete]
+        public async Task<IHttpActionResult> Delete(int id_user) {
+            var localized_friend = await GetFriendRepository.Find(id_user);
+
+            var deleted = await GetFriendRepository.Delete(localized_friend);
+            if(deleted) {
+                return Ok();
+            }
+
+            return BadRequest("Erro ao processar a solicitação");
+        }
+
     }
 }
