@@ -51,53 +51,52 @@ namespace API_Country.Controllers {
             return BadRequest("Erro ao processar a solicitação.");
         }
 
-        //[HttpPost]
-        //public async Task<IHttpActionResult> Store(InputStateModel input) {
-        //    var localized_country = await GetCountryRepository.Find(input.Id_Country);
+        [HttpPost]
+        public async Task<IHttpActionResult> Store(InputStateModel input) {
+            var localized_country = await GetCountryRepository.Find(input.Id_Country);
 
-        //    if(localized_country == null) {
-        //        return BadRequest("País não informado");
-        //    }
+            if(localized_country == null) {
+                return BadRequest("País não informado");
+            }
 
-        //    var new_state = new InputStateModel().CreateState(input);
-        //    new_state.Country = localized_country;
+            var new_state = new InputStateModel().CreateState(input);
+            new_state.Country = localized_country;
 
-        //    //localized_country.States.Add(new_state);
+            var saved_state = await GetStateRepository.Save(new_state);
 
-        //    var saved_state = await GetStateRepository.Save(new_state);
+            if(saved_state != null) {
+                var output_saved_state = OutputStateModel.ConvertState(saved_state);
+                return CreatedAtRoute("DefaultApi", new { id = output_saved_state.Id }, output_saved_state);
+            }
+            return BadRequest("Erro ao processar a solicitação");
+        }
 
-        //    //GetCountryRepository.Update(localized_country);
+        [HttpPut]
+        public async Task<IHttpActionResult> Update(int id, InputStateModel input) {
+            var localized_state = await GetStateRepository.Find(id);
+            var localized_country = await GetCountryRepository.Find(input.Id_Country);
 
-        //    if(saved_state != null) {
-        //        var output_saved_state = new OutputStateModel().state(saved_state);
-        //        return CreatedAtRoute("DefaultApi", new { id = output_saved_state.Id }, output_saved_state);
-        //    }
-        //    return BadRequest("Erro ao processar a solicitação");
-        //}
+            localized_state.Name = input.Name;
+            localized_state.UrlPicture = input.IdImage;
+            localized_state.Country = localized_country;
 
-        //    [HttpPut]
-        //    public IHttpActionResult Update(int id, InputStateModel input) {
-        //        var localized_state = GetStateRepository.Show(id);
-        //        localized_state.Name = input.Name;
-        //        localized_state.URLImage = input.IdImage;
+            var updated_state = await GetStateRepository.Update(localized_state);
 
-        //        var updated_state = GetStateRepository.Update(localized_state);
+            if(updated_state != null) {
+                var output_updated_country = OutputStateModel.ConvertState(updated_state);
+                return Ok(output_updated_country);
+            }
+            return BadRequest("Erro ao processar a solicitação");
+        }
 
-        //        if(updated_state != null) {
-        //            var output_updated_country = new OutputStateModel().state(updated_state);
-        //            return Ok(output_updated_country);
-        //        }
-        //        return BadRequest("Erro ao processar a solicitação");
-        //    }
-
-        //    [HttpDelete]
-        //    public IHttpActionResult Destroy(int id) {
-        //        var localized_state = GetStateRepository.Show(id);
-        //        if(localized_state != null) {
-        //            GetStateRepository.Delete(localized_state);
-        //            return Ok();
-        //        }
-        //        return BadRequest();
-        //    }
+        [HttpDelete]
+        public async Task<IHttpActionResult> Destroy(int id) {
+            var localized_state = await GetStateRepository.Find(id);
+            if(localized_state != null) {
+                await GetStateRepository.Delete(localized_state);
+                return Ok();
+            }
+            return BadRequest();
+        }
     }
 }
