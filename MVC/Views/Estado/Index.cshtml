@@ -32,7 +32,7 @@
             <img src="@Html.DisplayFor(modelItem => item.IdImage)" style="max-width:150px;" alt="img n carregou" />
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Pais)
+            @Html.DisplayFor(modelItem => item.Pais.Name)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

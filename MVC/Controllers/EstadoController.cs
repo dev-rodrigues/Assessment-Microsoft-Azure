@@ -71,9 +71,9 @@ namespace MVC.Controllers
         {
             var data = new Dictionary<string, string>
             {
-                {"Name", collection["Name"]},
-                {"IdImage", collection["IdImage"]},
-                {"Pais", collection["pais"] } 
+                {"Name", collection["Estado.Name"]},
+                {"IdImage", collection["Estado.IdImage"]},
+                {"Id_Country", collection["paises"] } 
             };
 
             using (var client = new HttpClient())
@@ -91,7 +91,7 @@ namespace MVC.Controllers
                 }
             }
 
-            return View();
+            return View("Error");
         }
 
         [HttpGet]
