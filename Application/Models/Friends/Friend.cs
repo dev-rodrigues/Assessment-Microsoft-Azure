@@ -1,11 +1,18 @@
-﻿using System;
+﻿using Application.Models.Territory.Countries;
+using Application.Models.Territory.States;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.Models.Friends {
     public class Friend {
+        public Friend() {
+            this.Friends = new HashSet<Friend>();
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
@@ -15,8 +22,12 @@ namespace Application.Models.Friends {
 
         public virtual ICollection<Friend> Friends { get; set; }
 
-        public Friend() {
-            this.Friends = new HashSet<Friend>();
-        }
+        [ForeignKey("Country")]
+        public int CountryId { get; set; }
+        public virtual Country Country { get; set; }
+
+        [ForeignKey("State")]
+        public int StateId { get; set; }
+        public virtual State State { get; set; }
     }
 }

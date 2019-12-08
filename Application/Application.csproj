@@ -53,37 +53,9 @@
   <ItemGroup>
     <Compile Include="Context\Database.cs" />
     <Compile Include="Context\DatabaseContext.cs" />
-    <Compile Include="Migrations\201912080318351_Criacao.cs" />
-    <Compile Include="Migrations\201912080318351_Criacao.designer.cs">
-      <DependentUpon>201912080318351_Criacao.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912080356170_Atualizacao.cs" />
-    <Compile Include="Migrations\201912080356170_Atualizacao.designer.cs">
-      <DependentUpon>201912080356170_Atualizacao.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912080417120_Atualizacao1.cs" />
-    <Compile Include="Migrations\201912080417120_Atualizacao1.designer.cs">
-      <DependentUpon>201912080417120_Atualizacao1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912080423253_Atualizacao2.cs" />
-    <Compile Include="Migrations\201912080423253_Atualizacao2.designer.cs">
-      <DependentUpon>201912080423253_Atualizacao2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912080425492_Atualizacao3.cs" />
-    <Compile Include="Migrations\201912080425492_Atualizacao3.designer.cs">
-      <DependentUpon>201912080425492_Atualizacao3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912080427536_Atualizacao4.cs" />
-    <Compile Include="Migrations\201912080427536_Atualizacao4.designer.cs">
-      <DependentUpon>201912080427536_Atualizacao4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912082007175_Friends.cs" />
-    <Compile Include="Migrations\201912082007175_Friends.designer.cs">
-      <DependentUpon>201912082007175_Friends.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912082019413_Friends1.cs" />
-    <Compile Include="Migrations\201912082019413_Friends1.designer.cs">
-      <DependentUpon>201912082019413_Friends1.cs</DependentUpon>
+    <Compile Include="Migrations\201912082158240_InitialCreate.cs" />
+    <Compile Include="Migrations\201912082158240_InitialCreate.designer.cs">
+      <DependentUpon>201912082158240_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Friends\Friend.cs" />
@@ -98,35 +70,13 @@
     <Compile Include="Repository\Territory\States\StateRepository.cs" />
     <Compile Include="Service\Locator.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201912080318351_Criacao.resx">
-      <DependentUpon>201912080318351_Criacao.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912080356170_Atualizacao.resx">
-      <DependentUpon>201912080356170_Atualizacao.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912080417120_Atualizacao1.resx">
-      <DependentUpon>201912080417120_Atualizacao1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912080423253_Atualizacao2.resx">
-      <DependentUpon>201912080423253_Atualizacao2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912080425492_Atualizacao3.resx">
-      <DependentUpon>201912080425492_Atualizacao3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912080427536_Atualizacao4.resx">
-      <DependentUpon>201912080427536_Atualizacao4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912082007175_Friends.resx">
-      <DependentUpon>201912082007175_Friends.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912082019413_Friends1.resx">
-      <DependentUpon>201912082019413_Friends1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201912082158240_InitialCreate.resx">
+      <DependentUpon>201912082158240_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

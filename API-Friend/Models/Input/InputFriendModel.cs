@@ -24,7 +24,8 @@ namespace API_Friend.Models.Input {
                 Telephone = input.Telephone,
                 Email = input.Email,
                 BirthDate = Convert.ToDateTime(input.BirthDate),
-
+                Country = country,
+                State = state
             };
         }
     }
