@@ -10,14 +10,24 @@ namespace API_PAISES.Models.OutputModel {
         public string Name { get; set; }
         public string IdImage { get; set; }
 
-        public ICollection<OutputStateModel> OutPutStates { get; set; }
+        public List<OutputStateModel> OutPutStates { get; set; }
 
         public OutputCountryModel() {
-            OutPutStates = new HashSet<OutputStateModel>();
+            OutPutStates = new List<OutputStateModel>();
         }
 
         public List<OutputCountryModel> countries(List<Country> countries) {
-            return null;
+            var output = new List<OutputCountryModel>();
+            foreach(var country in countries) {
+                var output_country = new OutputCountryModel() {
+                    Id = country.Id,
+                    IdImage = country.UrlPicture,
+                    Name = country.Name,
+                    OutPutStates = new OutputStateModel().States(country.States)
+                };
+                output.Add(output_country);
+            }
+            return output;
         }
 
         public OutputCountryModel country(Country country) {
@@ -27,7 +37,7 @@ namespace API_PAISES.Models.OutputModel {
             output.IdImage = country.UrlPicture;
 
 
-            var states = new HashSet<OutputStateModel>();
+            var states = new List<OutputStateModel>();
             foreach(var st in country.States) {
                 var converted_state = new OutputStateModel() {
                     Id = st.Id,
@@ -38,9 +48,7 @@ namespace API_PAISES.Models.OutputModel {
                 };
                 states.Add(converted_state);
             }
-
             output.OutPutStates = states;
-
             return output;
         }
     }

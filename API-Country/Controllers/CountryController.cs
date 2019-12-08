@@ -1,4 +1,5 @@
-﻿using API_PAISES.Models.InputModel;
+﻿using API_Country.Models.OutputModel;
+using API_PAISES.Models.InputModel;
 using API_PAISES.Models.OutputModel;
 using Application.Repository.Territory.Countries;
 using Application.Service;
@@ -25,23 +26,23 @@ namespace API_PAISES.Controllers {
             GetCountryRepository = Locator.GetInstanceOf<CountryRepository>();
         }
 
-        //[HttpGet]
-        //public IHttpActionResult Index() {
+        [HttpGet]
+        public IHttpActionResult Index() {
 
-        //    var countries = GetCountryRepository.Index().ToList<Country>();
+            var countries = GetCountryRepository.Index();
 
-        //    if(countries != null) {
-        //        var converted = new OutputCountryModel().countries(countries);
-        //        return Ok(converted);
-        //    }
-        //    return BadRequest("Erro ao processar a solicitação");
-        //}
+            if(countries != null) {
+                var converted = new OutputSimpleCountryModel().Convert(countries);
+                return Ok(converted);
+            }
+            return BadRequest("Erro ao processar a solicitação");
+        }
 
         [HttpGet]
         public async Task<IHttpActionResult> Show(int id) {
             var localized_country = await GetCountryRepository.Find(id);
             if(localized_country != null) {
-                var converted_country = new OutputCountryModel().country(localized_country);
+                var converted_country = new OutputSimpleCountryModel().Convert(localized_country);
                 return Ok(converted_country);
             }
             return BadRequest("Erro ao processar a solicitação.");

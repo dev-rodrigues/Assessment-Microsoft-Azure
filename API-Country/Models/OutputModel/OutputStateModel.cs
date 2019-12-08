@@ -12,7 +12,27 @@ namespace API_PAISES.Models.OutputModel {
 
         public OutputCountryModel CountryModel { get; set; }
 
-        public List<OutputStateModel> states(List<State> states) {
+        //public List<OutputStateModel> states(List<State> states) {
+        //    List<OutputStateModel> output = new List<OutputStateModel>();
+        //    foreach(State state in states) {
+        //        OutputStateModel model = new OutputStateModel() {
+        //            Id = state.Id,
+        //            Name = state.Name,
+        //            IdImage = state.UrlPicture,
+        //        };
+
+        //        OutputCountryModel country = new OutputCountryModel() {
+        //            Id = state.Country.Id,
+        //            Name = state.Country.Name,
+        //            IdImage = state.Country.UrlPicture
+        //        };
+        //        model.CountryModel = country;
+        //        output.Add(model);
+        //    }
+        //    return output;
+        //}
+
+        public List<OutputStateModel> States(ICollection<State> states) {
             List<OutputStateModel> output = new List<OutputStateModel>();
             foreach(State state in states) {
                 OutputStateModel model = new OutputStateModel() {
@@ -26,9 +46,7 @@ namespace API_PAISES.Models.OutputModel {
                     Name = state.Country.Name,
                     IdImage = state.Country.UrlPicture
                 };
-
                 model.CountryModel = country;
-
                 output.Add(model);
             }
             return output;

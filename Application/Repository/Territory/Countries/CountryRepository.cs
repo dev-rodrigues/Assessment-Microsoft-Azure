@@ -21,6 +21,10 @@ namespace Application.Repository.Territory.Countries {
             }
         }
 
+        public List<Country> Index() {
+            return db.GetInstance.Countries.ToList();
+        }
+
         public async Task<Country> Save(Country country) {
             try {
                 db.GetInstance.Countries.Add(country);

@@ -172,6 +172,8 @@
     </Compile>
     <Compile Include="Models\InputModel\InputCountryModel.cs" />
     <Compile Include="Models\InputModel\InputStateModel.cs" />
+    <Compile Include="Models\OutputModel\OutputSimpleCountryModel.cs" />
+    <Compile Include="Models\OutputModel\OutputSimpleStateModel.cs" />
     <Compile Include="Models\OutputModel\OutputStateModel.cs" />
     <Compile Include="Models\OutputModel\OutputCountryModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
