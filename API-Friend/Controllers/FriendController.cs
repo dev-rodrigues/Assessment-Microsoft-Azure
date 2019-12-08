@@ -32,6 +32,18 @@ namespace API_Friend.Controllers {
             this.GetFriendRepository = Locator.GetInstanceOf<FriendRepository>();
         }
 
+        [HttpGet]
+        public IHttpActionResult Index() {
+            var localized_friends = GetFriendRepository.Index();
+
+            if(localized_friends != null) {
+                var converted_friends = OutputFriendModel.CreateOutputFriends(localized_friends);
+                return Ok(converted_friends);
+            }
+
+            return BadRequest("Erro ao processar a solicitação");
+        }
+
         [HttpPost]
         public async Task<IHttpActionResult> Store(InputFriendModel inputFriend) {
             var country = await GetCountryRepository.Find(inputFriend.IdCountry);

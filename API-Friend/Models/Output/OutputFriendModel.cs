@@ -12,6 +12,17 @@ namespace API_Friend.Models.Output {
             this.State = new OutputStateModel();
         }
 
+        public static List<OutputFriendModel> CreateOutputFriends(List<Friend> friends) {
+            var output = new List<OutputFriendModel>();
+
+            foreach(var friend in friends) {
+                var converted = CreateOutputFriend(friend);
+                output.Add(converted);
+            }
+
+            return output;
+        }
+
         public static OutputFriendModel CreateOutputFriend(Friend friend) {
             var country = new OutputCountryModel() {
                 Id = friend.Country.Id,
