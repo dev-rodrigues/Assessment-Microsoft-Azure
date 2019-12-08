@@ -142,7 +142,8 @@ namespace MVC.Controllers
             var data = new Dictionary<string, string>
             {
                 {"Name", collection["Name"]},
-                {"IdImage", collection["IdImage"]}
+                {"IdImage", collection["IdImage"]},
+                {"Id_Country", collection["paises"] }
             };
 
             using (var client = new HttpClient())

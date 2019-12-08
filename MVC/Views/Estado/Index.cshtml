@@ -17,9 +17,6 @@
         <th>
             @Html.DisplayNameFor(model => model.IdImage)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Pais)
-        </th>
         <th></th>
     </tr>
 
@@ -30,9 +27,6 @@
         </td>
         <td>
             <img src="@Html.DisplayFor(modelItem => item.IdImage)" style="max-width:150px;" alt="img n carregou" />
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Pais.Name)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

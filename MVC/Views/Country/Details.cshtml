@@ -26,13 +26,13 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Estados)
+            @Html.DisplayNameFor(model => model.States)
         </dt>
 
         <dd>
             <select>
                 <option selected>Estados</option>
-                @foreach (var estado in Model.Estados)
+                @foreach (var estado in Model.States)
                 {
                     <option>@estado.Name</option>
                 }

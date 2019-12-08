@@ -58,7 +58,7 @@ namespace MVC.Controllers {
                     }
                 }
             }
-            return View();
+            return View("Error");
         }
 
         [HttpGet]
@@ -79,7 +79,7 @@ namespace MVC.Controllers {
                 }
             }
 
-            return View();
+            return View("Error");
 
         }
 
@@ -100,7 +100,7 @@ namespace MVC.Controllers {
                     if(response.IsSuccessStatusCode) {
                         return RedirectToAction("Index");
                     } else {
-                        return View();
+                        return View("Error");
                     }
                 }
             }
@@ -124,7 +124,7 @@ namespace MVC.Controllers {
                 }
             }
 
-            return View();
+            return View("Error");
         }
 
         [HttpPost]
@@ -137,7 +137,7 @@ namespace MVC.Controllers {
                 if(response.IsSuccessStatusCode) {
                     return RedirectToAction("Index");
                 } else {
-                    return View();
+                    return View("Error");
                 }
             }
         }
@@ -160,7 +160,7 @@ namespace MVC.Controllers {
                 }
             }
 
-            return View();
+            return View("Error");
         }
 
     }

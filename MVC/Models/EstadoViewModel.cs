@@ -10,6 +10,6 @@ namespace MVC.Models
         public string Id { get; set; }
         public string Name { get; set; }
         public string IdImage { get; set; }
-        public PaisViewModel Pais { get; set; }
+        public PaisViewModel Country { get; set; }
     }
 }
