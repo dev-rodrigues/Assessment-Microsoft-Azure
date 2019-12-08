@@ -48,9 +48,17 @@ namespace API_Friend.Controllers {
             if(saved_friend.Id != 0) {
                 return CreatedAtRoute("DefaultApi", new { id = converted_friend.Id }, converted_friend);
             }
+            return BadRequest("Erro ao processar a solicitação");
+        }
 
+        [HttpGet]
+        public async Task<IHttpActionResult> Show(int id_user) {
+            var localized_friend = await GetFriendRepository.Find(id_user);
 
-
+            if(localized_friend != null) {
+                var converted_friend = OutputFriendModel.CreateOutputFriend(localized_friend);
+                return Ok(converted_friend);
+            }
             return BadRequest("Erro ao processar a solicitação");
         }
 
