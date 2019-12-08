@@ -11,5 +11,6 @@ namespace Application.Repository.Territory.Countries {
         Task<Country> Update(Country country);
         Task<bool> Delete(Country country);
         Task<Country> Find(int id_country);
+        List<Country> Index();
     }
 }

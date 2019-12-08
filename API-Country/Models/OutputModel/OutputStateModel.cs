@@ -4,50 +4,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace API_PAISES.Models.OutputModel {
+namespace API_Country.Models.OutputModel {
     public class OutputStateModel {
         public int Id { get; set; }
         public string Name { get; set; }
         public string IdImage { get; set; }
 
-        public OutputCountryModel CountryModel { get; set; }
+        public OutputCountryModel Country { get; set; }
 
-        public List<OutputStateModel> states(List<State> states) {
-            List<OutputStateModel> output = new List<OutputStateModel>();
-            foreach(State state in states) {
-                OutputStateModel model = new OutputStateModel() {
-                    Id = state.Id,
-                    Name = state.Name,
-                    IdImage = state.UrlPicture,
-                };
-
-                OutputCountryModel country = new OutputCountryModel() {
-                    Id = state.Country.Id,
-                    Name = state.Country.Name,
-                    IdImage = state.Country.UrlPicture
-                };
-
-                model.CountryModel = country;
-
-                output.Add(model);
-            }
-            return output;
-        }
-
-        public OutputStateModel state(State state) {
-            var output = new OutputStateModel() {
-                Id = state.Id,
-                Name = state.Name,
-                IdImage = state.UrlPicture
-            };
-
-            OutputCountryModel country = new OutputCountryModel() {
+        public static OutputStateModel ConvertState(State state) {
+            var converted_country = new OutputCountryModel() {
                 Id = state.Country.Id,
-                Name = state.Country.Name,
-                IdImage = state.Country.UrlPicture
+                Name = state.Country.Name
             };
 
-            output.CountryModel = country;
+            OutputStateModel output = new OutputStateModel() {
+                Id = state.Id,
+                IdImage = state.UrlPicture,
+                Name = state.Name,
+                Country = converted_country
+            };
+
             return output;
         }
     }
