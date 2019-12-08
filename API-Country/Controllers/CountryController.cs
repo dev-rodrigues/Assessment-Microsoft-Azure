@@ -48,22 +48,13 @@ namespace API_PAISES.Controllers {
             return BadRequest("Erro ao processar a solicitação.");
         }
 
-        //[HttpGet]
-        //public IHttpActionResult Show(string name) {
-        //    var localized_country = GetCountryRepository.Show(name);
-        //    if(localized_country != null) {
-        //        var converted_country = new OutputCountryModel().country(localized_country);
-        //        return Ok(converted_country);
-        //    }
-        //    return BadRequest("Erro ao processar a solicitação.");
-        //}
-
         [HttpPost]
         public async Task<IHttpActionResult> Store(InputCountryModel input) {
             var new_country = new InputCountryModel().CreateCountry(input);
+
             var saved_country = await GetCountryRepository.Save(new_country);
 
-            var output_saved_country = new OutputCountryModel().country(saved_country);
+            var output_saved_country = new OutputSimpleCountryModel().Convert(saved_country);
 
             if(saved_country != null) {
                 return CreatedAtRoute("DefaultApi", new { id = output_saved_country.Id }, output_saved_country);
@@ -71,29 +62,29 @@ namespace API_PAISES.Controllers {
             return BadRequest("Erro ao processar a solicitação");
         }
 
-        //[HttpPut]
-        //public IHttpActionResult Update(int id, InputCountryModel input) {
-        //    var localized_country = GetCountryRepository.Show(id);
-        //    localized_country.Name = input.Name;
-        //    localized_country.URLImage = input.IdImage;
+        [HttpPut]
+        public async Task<IHttpActionResult> Update(int id, InputCountryModel input) {
+            var localized_country = await GetCountryRepository.Find(id);
+            localized_country.Name = input.Name;
+            localized_country.UrlPicture = input.IdImage;
 
-        //    var updated_country = GetCountryRepository.Update(localized_country);
+            var updated_country = await GetCountryRepository.Update(localized_country);
 
-        //    if(updated_country != null) {
-        //        var output_updated_country = new OutputCountryModel().country(updated_country);
-        //        return Ok(output_updated_country);
-        //    }
-        //    return BadRequest("Erro ao processar a solicitação");
-        //}
+            if(updated_country != null) {
+                var output_updated_country = new OutputCountryModel().country(updated_country);
+                return Ok(output_updated_country);
+            }
+            return BadRequest("Erro ao processar a solicitação");
+        }
 
-        //[HttpDelete]
-        //public IHttpActionResult Destroy(int id) {
-        //    var localized_country = GetCountryRepository.Show(id);
-        //    if(localized_country != null) {
-        //        GetCountryRepository.Delete(localized_country);
-        //        return Ok();
-        //    }
-        //    return BadRequest();
-        //}
+        [HttpDelete]
+        public async Task<IHttpActionResult> Destroy(int id) {
+            var localized_country = await GetCountryRepository.Find(id);
+            if(localized_country != null) {
+                await GetCountryRepository.Delete(localized_country);
+                return Ok();
+            }
+            return BadRequest();
+        }
     }
 }

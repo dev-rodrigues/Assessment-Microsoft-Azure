@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,8 +9,16 @@ using db = Application.Database.Database;
 
 namespace Application.Repository.Territory.Countries {
     public class CountryRepository : ICountry {
-        public Task<bool> Delete(Country country) {
-            throw new NotImplementedException();
+
+        public async Task<bool> Delete(Country country) {
+            try {
+                db.GetInstance.Countries.Remove(country);
+                await db.GetInstance.SaveChangesAsync();
+                return true;
+            } catch(Exception e) {
+                Console.WriteLine(e.Message);
+                return false;
+            }
         }
 
         public async Task<Country> Find(int id_country) {
@@ -36,8 +45,15 @@ namespace Application.Repository.Territory.Countries {
             }
         }
 
-        public Task<Country> Update(Country country) {
-            throw new NotImplementedException();
+        public async Task<Country> Update(Country country) {
+            try {
+                db.GetInstance.Entry<Country>(country).State = EntityState.Modified;
+                await db.GetInstance.SaveChangesAsync();
+                return country;
+            } catch(Exception e) {
+                Console.WriteLine(e.Message);
+                return null;
+            }
         }
     }
 }

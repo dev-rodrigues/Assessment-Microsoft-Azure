@@ -12,13 +12,15 @@ namespace API_Country.Models.OutputModel {
 
         public List<OutputSimpleStateModel> States(ICollection<State> states) {
             List<OutputSimpleStateModel> output = new List<OutputSimpleStateModel>();
-            foreach(State state in states) {
-                OutputSimpleStateModel model = new OutputSimpleStateModel() {
-                    Id = state.Id,
-                    Name = state.Name,
-                    IdImage = state.UrlPicture,
-                };
-                output.Add(model);
+            if(states != null) {
+                foreach(State state in states) {
+                    OutputSimpleStateModel model = new OutputSimpleStateModel() {
+                        Id = state.Id,
+                        Name = state.Name,
+                        IdImage = state.UrlPicture,
+                    };
+                    output.Add(model);
+                }
             }
             return output;
         }

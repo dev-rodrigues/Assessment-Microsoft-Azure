@@ -13,6 +13,7 @@ namespace API_Country.Models.OutputModel {
 
         public List<OutputSimpleCountryModel> Convert(List<Country> countries) {
             List<OutputSimpleCountryModel> output = new List<OutputSimpleCountryModel>();
+
             foreach(var obj in countries) {
                 var country = new OutputSimpleCountryModel() {
                     Id = obj.Id,
