@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class init : DbMigration
     {
         public override void Up()
         {
@@ -42,28 +42,42 @@
                         BirthDate = c.DateTime(nullable: false),
                         CountryId = c.Int(nullable: false),
                         StateId = c.Int(nullable: false),
-                        Friend_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Countries", t => t.CountryId, cascadeDelete: false)
-                .ForeignKey("dbo.Friends", t => t.Friend_Id)
                 .ForeignKey("dbo.States", t => t.StateId, cascadeDelete: false)
                 .Index(t => t.CountryId)
-                .Index(t => t.StateId)
-                .Index(t => t.Friend_Id);
+                .Index(t => t.StateId);
+            
+            CreateTable(
+                "dbo.Friendships",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Followed_Id = c.Int(),
+                        Follower_Id = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Friends", t => t.Followed_Id)
+                .ForeignKey("dbo.Friends", t => t.Follower_Id)
+                .Index(t => t.Followed_Id)
+                .Index(t => t.Follower_Id);
             
         }
         
         public override void Down()
         {
+            DropForeignKey("dbo.Friendships", "Follower_Id", "dbo.Friends");
+            DropForeignKey("dbo.Friendships", "Followed_Id", "dbo.Friends");
             DropForeignKey("dbo.Friends", "StateId", "dbo.States");
-            DropForeignKey("dbo.Friends", "Friend_Id", "dbo.Friends");
             DropForeignKey("dbo.Friends", "CountryId", "dbo.Countries");
             DropForeignKey("dbo.States", "CountryId", "dbo.Countries");
-            DropIndex("dbo.Friends", new[] { "Friend_Id" });
+            DropIndex("dbo.Friendships", new[] { "Follower_Id" });
+            DropIndex("dbo.Friendships", new[] { "Followed_Id" });
             DropIndex("dbo.Friends", new[] { "StateId" });
             DropIndex("dbo.Friends", new[] { "CountryId" });
             DropIndex("dbo.States", new[] { "CountryId" });
+            DropTable("dbo.Friendships");
             DropTable("dbo.Friends");
             DropTable("dbo.States");
             DropTable("dbo.Countries");
