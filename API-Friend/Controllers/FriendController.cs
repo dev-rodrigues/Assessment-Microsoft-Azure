@@ -18,7 +18,7 @@ using System.Web.UI.WebControls;
 
 namespace API_Friend.Controllers {
 
-    [RoutePrefix("api/Country")]
+    [RoutePrefix("api/Friend")]
     public class FriendController : ApiController {
 
         private ICountry GetCountryRepository { get; }
