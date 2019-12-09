@@ -13,7 +13,9 @@ namespace MVC.Controllers
 {
     public class AmigoController : Controller
     {
-        private readonly string base_url = "http://localhost:52353/";
+        private readonly string base_url_amigo = "http://localhost:52353";
+        private readonly string base_url_pais_estado = "http://localhost:54595";
+
 
         // GET: Country
         [HttpGet]
@@ -23,7 +25,7 @@ namespace MVC.Controllers
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(base_url);
+                client.BaseAddress = new Uri(base_url_amigo);
 
                 var response = await client.GetAsync("api/Friend");
 
@@ -52,7 +54,7 @@ namespace MVC.Controllers
             // pega pais
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(base_url);
+                client.BaseAddress = new Uri(base_url_pais_estado);
 
                 var response = await client.GetAsync("api/Country");
 
@@ -71,7 +73,7 @@ namespace MVC.Controllers
             // pega estado
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(base_url);
+                client.BaseAddress = new Uri(base_url_pais_estado);
 
                 var response = await client.GetAsync("api/State");
 
@@ -103,13 +105,13 @@ namespace MVC.Controllers
                 {"Email", collection["Amigo.Email"]},
                 {"Telephone", collection["Amigo.Telephone"]},
                 {"BirthDate", collection["Amigo.BirthDate"]},
-                {"Country", collection["paises"]},
-                {"State", collection["estados"]},
+                {"IdCountry", collection["paises"]},
+                {"IdState", collection["estados"]},
             };
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(base_url);
+                client.BaseAddress = new Uri(base_url_amigo);
 
                 using (var requestContent = new FormUrlEncodedContent(data))
                 {
@@ -135,7 +137,7 @@ namespace MVC.Controllers
             // pega paises
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(base_url);
+                client.BaseAddress = new Uri(base_url_pais_estado);
 
                 var response = await client.GetAsync("api/Country");
 
@@ -152,7 +154,7 @@ namespace MVC.Controllers
             // pega estados
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(base_url);
+                client.BaseAddress = new Uri(base_url_pais_estado);
 
                 var response = await client.GetAsync("api/State");
 
@@ -169,7 +171,7 @@ namespace MVC.Controllers
             // pega user
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(base_url);
+                client.BaseAddress = new Uri(base_url_amigo);
 
                 var response = await client.GetAsync($"api/Friend?id_user={id}");
 
@@ -200,13 +202,13 @@ namespace MVC.Controllers
                 {"Email", collection["Amigo.Email"]},
                 {"Telephone", collection["Amigo.Telephone"]},
                 {"BirthDate", collection["Amigo.BirthDate"]},
-                {"Country", collection["paises"]},
-                {"State", collection["estados"]},
+                {"IdCountry", collection["paises"]},
+                {"IdState", collection["estados"]},
             };
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(base_url);
+                client.BaseAddress = new Uri(base_url_amigo);
 
                 using (var requestContent = new FormUrlEncodedContent(data))
                 {
@@ -231,7 +233,7 @@ namespace MVC.Controllers
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(base_url);
+                client.BaseAddress = new Uri(base_url_amigo);
 
                 var response = await client.GetAsync($"api/Friend?id_user={id}");
 
@@ -253,7 +255,7 @@ namespace MVC.Controllers
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(base_url);
+                client.BaseAddress = new Uri(base_url_amigo);
 
                 var response = await client.DeleteAsync($"api/Friend/{id}");
 
@@ -275,7 +277,7 @@ namespace MVC.Controllers
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(base_url);
+                client.BaseAddress = new Uri(base_url_amigo);
 
                 var response = await client.GetAsync($"api/Friend?id_user={id}");
 

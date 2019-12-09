@@ -87,6 +87,7 @@ namespace API_Friend.Controllers {
             localized_friend.Name = inputFriend.Name;
             localized_friend.LastName = inputFriend.LastName;
             localized_friend.Email = inputFriend.Email;
+            localized_friend.Telephone = inputFriend.Telephone;
             localized_friend.BirthDate = Convert.ToDateTime(inputFriend.BirthDate);
             localized_friend.Country = country;
             localized_friend.State = state;
