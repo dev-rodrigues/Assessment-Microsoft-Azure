@@ -13,7 +13,7 @@ namespace MVC.Controllers
 {
     public class AmigoController : Controller
     {
-        private readonly string base_url = "http://localhost:54595";
+        private readonly string base_url = "http://localhost:52353/";
 
         // GET: Country
         [HttpGet]

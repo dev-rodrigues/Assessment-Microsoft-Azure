@@ -130,6 +130,7 @@
     <Compile Include="Models\create\CreateAmigoViewModel.cs" />
     <Compile Include="Models\create\CreateEstadoViewModel.cs" />
     <Compile Include="Models\edit\EditAmigoViewModel.cs" />
+    <Compile Include="Models\edit\EditEstadoViewModel.cs" />
     <Compile Include="Models\EstadoViewModel.cs" />
     <Compile Include="Models\FriendViewModel.cs" />
     <Compile Include="Models\PaisViewModel.cs" />
