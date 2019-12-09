@@ -1,7 +1,5 @@
 ﻿using API_Friend.Models.Input;
 using API_Friend.Models.Output;
-using Application.Models.Friendships;
-using Application.Repository.Friendships;
 using Application.Repository.Territory.Countries;
 using Application.Repository.Territory.Friends;
 using Application.Repository.Territory.States;
@@ -24,11 +22,9 @@ namespace API_Friend.Controllers {
     public class FriendshipController : ApiController {
 
         private IFriend GetFriendRepository { get; }
-        private IFriendship GetFriendship { get; }
 
         public FriendshipController() {
             this.GetFriendRepository = Locator.GetInstanceOf<FriendRepository>();
-            this.GetFriendship = Locator.GetInstanceOf<FriendshipRepository>();
         }
 
         [HttpPost]
@@ -45,16 +41,6 @@ namespace API_Friend.Controllers {
                 return BadRequest("Erro ao processar a solicitação");
             }
 
-            var amizade = new Friendship() {
-                Follower = localized_follower,
-                Followed = localized_followed
-            };
-
-            var saved_friendship = await GetFriendship.Save(amizade);
-
-            if(saved_friendship != null) {
-
-            }
 
             //if(user_updated != null) {
             //    var converted_friend = OutputFriendModel.CreateOutputFriend(user_updated);

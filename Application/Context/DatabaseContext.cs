@@ -1,6 +1,5 @@
 ﻿using System.Data.Entity;
 using Application.Models.Friends;
-using Application.Models.Friendships;
 using Application.Models.Territory.Countries;
 using Application.Models.Territory.States;
 
@@ -21,7 +20,7 @@ namespace Application.Database {
             get; set;
         }
 
-        public DbSet<Friendship> Friendships {
+        public DbSet<Connection> Connections {
             get; set;
         }
 

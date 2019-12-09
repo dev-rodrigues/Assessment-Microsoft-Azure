@@ -7,13 +7,13 @@ namespace Application.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-    public sealed partial class Friendships : IMigrationMetadata
+    public sealed partial class init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Friendships));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
         
         string IMigrationMetadata.Id
         {
-            get { return "201912090121359_Friendships"; }
+            get { return "201912090224377_init"; }
         }
         
         string IMigrationMetadata.Source
