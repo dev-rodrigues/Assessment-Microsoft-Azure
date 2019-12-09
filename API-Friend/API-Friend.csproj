@@ -169,8 +169,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Input\InputFriendModel.cs" />
+    <Compile Include="Models\Input\InputFriendshipModel.cs" />
     <Compile Include="Models\Output\OutputCountryModel.cs" />
     <Compile Include="Models\Output\OutputFriendModel.cs" />
+    <Compile Include="Models\Output\OutputSingleFriendModel.cs" />
     <Compile Include="Models\Output\OutputStateModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -227,8 +229,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Friendship\" />
-    <Folder Include="Views\Friend\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
