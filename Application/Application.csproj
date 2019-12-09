@@ -57,15 +57,26 @@
     <Compile Include="Migrations\201912082158240_InitialCreate.designer.cs">
       <DependentUpon>201912082158240_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912090121359_Friendships.cs" />
+    <Compile Include="Migrations\201912090121359_Friendships.designer.cs">
+      <DependentUpon>201912090121359_Friendships.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912090123549_Removendo_amigos.cs" />
+    <Compile Include="Migrations\201912090123549_Removendo_amigos.designer.cs">
+      <DependentUpon>201912090123549_Removendo_amigos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Friendships\Friendship.cs" />
     <Compile Include="Models\Friends\Friend.cs" />
     <Compile Include="Models\Territory\Countries\Country.cs" />
     <Compile Include="Models\Territory\States\State.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Friendships\FriendshipRepository.cs" />
+    <Compile Include="Repository\Friendships\IFriendship.cs" />
     <Compile Include="Repository\Territory\Countries\CountryRepository.cs" />
     <Compile Include="Repository\Territory\Countries\ICountry.cs" />
-    <Compile Include="Repository\Territory\Friends\FriendRepository.cs" />
-    <Compile Include="Repository\Territory\Friends\IFriend.cs" />
+    <Compile Include="Repository\Friends\FriendRepository.cs" />
+    <Compile Include="Repository\Friends\IFriend.cs" />
     <Compile Include="Repository\Territory\States\IState.cs" />
     <Compile Include="Repository\Territory\States\StateRepository.cs" />
     <Compile Include="Service\Locator.cs" />
@@ -78,7 +89,14 @@
     <EmbeddedResource Include="Migrations\201912082158240_InitialCreate.resx">
       <DependentUpon>201912082158240_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912090121359_Friendships.resx">
+      <DependentUpon>201912090121359_Friendships.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912090123549_Removendo_amigos.resx">
+      <DependentUpon>201912090123549_Removendo_amigos.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
