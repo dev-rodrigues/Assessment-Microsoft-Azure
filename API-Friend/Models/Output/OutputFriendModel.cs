@@ -10,6 +10,7 @@ namespace API_Friend.Models.Output {
         public OutputFriendModel() {
             this.Country = new OutputCountryModel();
             this.State = new OutputStateModel();
+            this.Friends = new List<OutputSingleFriendModel>();
         }
 
         public static List<OutputFriendModel> CreateOutputFriends(List<Friend> friends) {
@@ -34,6 +35,17 @@ namespace API_Friend.Models.Output {
                 Name = friend.State.Name
             };
 
+            var localized_friends = new List<OutputSingleFriendModel>();
+            foreach(var obj in friend.Friends) {
+                var f = new OutputSingleFriendModel() {
+                    Id = obj.Id,
+                    Name = obj.Name,
+                    LastName = obj.LastName,
+                    Email = obj.Email
+                };
+                localized_friends.Add(f);
+            }
+
             return new OutputFriendModel() {
                 Id = friend.Id,
                 Name = friend.Name,
@@ -42,7 +54,8 @@ namespace API_Friend.Models.Output {
                 BirthDate = friend.BirthDate.ToString(),
                 Telephone = friend.Telephone,
                 Country = country,
-                State = state
+                State = state,
+                Friends = localized_friends
             };
         }
 
@@ -55,5 +68,6 @@ namespace API_Friend.Models.Output {
 
         public OutputCountryModel Country { get; set; }
         public OutputStateModel State { get; set; }
+        public List<OutputSingleFriendModel> Friends { get; set; }
     }
 }

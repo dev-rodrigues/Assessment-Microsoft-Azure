@@ -28,10 +28,23 @@ namespace API_Friend.Controllers {
         }
 
         [HttpPost]
-        public async Task<IHttpActionResult> Store() {
+        public async Task<IHttpActionResult> Store(InputFriendshipModel input) {
+            var Followed = await GetFriendRepository.Find(input.IdFollowed);
+            var Follower = await GetFriendRepository.Find(input.IdFollower);
+
+            if(Followed == null || Follower == null) {
+                return BadRequest("Erro ao processar a solicitação");
+            }
+
+            Followed.Friends.Add(Follower);
+            var user_updated = await GetFriendRepository.Update(Followed);
+
+            if(user_updated != null) {
+                var converted_friend = OutputFriendModel.CreateOutputFriend(user_updated);
+                return Ok(converted_friend);
+            }
+
             return BadRequest("Erro ao processar a solicitação");
         }
-
-
     }
 }
