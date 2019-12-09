@@ -73,7 +73,7 @@ namespace MVC.Controllers {
                 if(response.IsSuccessStatusCode) {
                     var responseContent = await response.Content.ReadAsStringAsync();
 
-                    var paisContent = JsonConvert.DeserializeObject<PaisViewModel>(responseContent);
+                    pais = JsonConvert.DeserializeObject<PaisViewModel>(responseContent);
 
                     return View(pais);
                 }

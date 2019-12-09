@@ -11,29 +11,29 @@ using System.Web.Mvc;
 
 namespace MVC.Controllers
 {
-    public class EstadoController : Controller
+    public class AmigoController : Controller
     {
         private readonly string base_url = "http://localhost:54595";
 
-        // GET: State
+        // GET: Country
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            var estados = new List<EstadoViewModel>();
+            var amigos = new List<FriendViewModel>();
 
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(base_url);
 
-                var response = await client.GetAsync("api/State");
+                var response = await client.GetAsync("api/Friend");
 
                 if (response.IsSuccessStatusCode)
                 {
                     var responseContent = await response.Content.ReadAsStringAsync();
 
-                    estados = JsonConvert.DeserializeObject<List<EstadoViewModel>>(responseContent);
+                    amigos = JsonConvert.DeserializeObject<List<FriendViewModel>>(responseContent);
 
-                    return View(estados);
+                    return View(amigos);
                 }
             }
 
@@ -44,9 +44,12 @@ namespace MVC.Controllers
         public async Task<ActionResult> Create()
         {
             var paises = new List<PaisViewModel>();
-            CreateEstadoViewModel estado = new CreateEstadoViewModel();
+            var estados = new List<EstadoViewModel>();
+            CreateAmigoViewModel amigo = new CreateAmigoViewModel();
             bool pegouPaises = false;
+            bool pegouEstados = false;
 
+            // pega pais
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(base_url);
@@ -59,17 +62,35 @@ namespace MVC.Controllers
 
                     paises = JsonConvert.DeserializeObject<List<PaisViewModel>>(responseContent);
 
-                    estado.Paises = paises;
+                    amigo.Paises = paises;
 
                     pegouPaises = true;
                 }
             }
 
-            if(pegouPaises)
-                return View(estado);
+            // pega estado
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(base_url);
+
+                var response = await client.GetAsync("api/State");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+
+                    estados = JsonConvert.DeserializeObject<List<EstadoViewModel>>(responseContent);
+
+                    amigo.Estados = estados;
+
+                    pegouEstados = true;
+                }
+            }
+
+            if(pegouPaises && pegouEstados)
+                return View(amigo);
             else
                 return View("Error");
-
         }
 
         [HttpPost]
@@ -77,9 +98,13 @@ namespace MVC.Controllers
         {
             var data = new Dictionary<string, string>
             {
-                {"Name", collection["Estado.Name"]},
-                {"IdImage", collection["Estado.IdImage"]},
-                {"Id_Country", collection["paises"] } 
+                {"Name", collection["Amigo.Name"]},
+                {"LastName", collection["Amigo.LastName"]},
+                {"Email", collection["Amigo.Email"]},
+                {"Telephone", collection["Amigo.Telephone"]},
+                {"BirthDate", collection["Amigo.BirthDate"]},
+                {"Country", collection["paises"]},
+                {"State", collection["estados"]},
             };
 
             using (var client = new HttpClient())
@@ -88,7 +113,7 @@ namespace MVC.Controllers
 
                 using (var requestContent = new FormUrlEncodedContent(data))
                 {
-                    var response = await client.PostAsync("api/State", requestContent);
+                    var response = await client.PostAsync("api/Friend", requestContent);
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -96,18 +121,18 @@ namespace MVC.Controllers
                     }
                 }
             }
-
             return View("Error");
         }
 
         [HttpGet]
         public async Task<ActionResult> Edit(string id)
         {
-            EditEstadoViewModel EditEstado = new EditEstadoViewModel();
+            EditAmigoViewModel EditAmigo = new EditAmigoViewModel();
             bool pegouPaises = false;
-            bool pegouEstado = false;
+            bool pegouEstados = false;
+            bool pegouUser = false;
 
-            // pegou paises
+            // pega paises
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(base_url);
@@ -118,31 +143,48 @@ namespace MVC.Controllers
                 {
                     var responseContent = await response.Content.ReadAsStringAsync();
 
-                    EditEstado.Paises = JsonConvert.DeserializeObject<List<PaisViewModel>>(responseContent);
+                    EditAmigo.Paises = JsonConvert.DeserializeObject<List<PaisViewModel>>(responseContent);
 
                     pegouPaises = true;
                 }
             }
 
-            // pegou estado
+            // pega estados
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(base_url);
 
-                var response = await client.GetAsync($"api/State/{id}");
+                var response = await client.GetAsync("api/State");
 
                 if (response.IsSuccessStatusCode)
                 {
                     var responseContent = await response.Content.ReadAsStringAsync();
 
-                    EditEstado.Estado = JsonConvert.DeserializeObject<EstadoViewModel>(responseContent);
+                    EditAmigo.Estados = JsonConvert.DeserializeObject<List<EstadoViewModel>>(responseContent);
 
-                    pegouEstado = true;
+                    pegouEstados = true;
                 }
             }
 
-            if(pegouPaises && pegouEstado)
-                return View(EditEstado);
+            // pega user
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(base_url);
+
+                var response = await client.GetAsync($"api/Friend?id_user={id}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+
+                    EditAmigo.Amigo = JsonConvert.DeserializeObject<FriendViewModel>(responseContent);
+
+                    pegouUser = true;
+                }
+            }
+
+            if (pegouPaises && pegouEstados && pegouUser)
+                return View(EditAmigo);
             else
                 return View("Error");
 
@@ -153,9 +195,13 @@ namespace MVC.Controllers
         {
             var data = new Dictionary<string, string>
             {
-                {"Name", collection["EditEstado.Name"]},
-                {"IdImage", collection["EditEstado.IdImage"]},
-                {"Id_Country", collection["paises"] }
+                {"Name", collection["Amigo.Name"]},
+                {"LastName", collection["Amigo.LastName"]},
+                {"Email", collection["Amigo.Email"]},
+                {"Telephone", collection["Amigo.Telephone"]},
+                {"BirthDate", collection["Amigo.BirthDate"]},
+                {"Country", collection["paises"]},
+                {"State", collection["estados"]},
             };
 
             using (var client = new HttpClient())
@@ -164,7 +210,7 @@ namespace MVC.Controllers
 
                 using (var requestContent = new FormUrlEncodedContent(data))
                 {
-                    var response = await client.PutAsync($"api/State/{id}", requestContent);
+                    var response = await client.PutAsync($"api/Friend?id_user={id}", requestContent);
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -172,7 +218,7 @@ namespace MVC.Controllers
                     }
                     else
                     {
-                        return View();
+                        return View("Error");
                     }
                 }
             }
@@ -181,25 +227,25 @@ namespace MVC.Controllers
         [HttpGet]
         public async Task<ActionResult> Delete(string id)
         {
-            EstadoViewModel estado = new EstadoViewModel();
+            FriendViewModel amigo = new FriendViewModel();
 
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(base_url);
 
-                var response = await client.GetAsync($"api/State/{id}");
+                var response = await client.GetAsync($"api/Friend?id_user={id}");
 
                 if (response.IsSuccessStatusCode)
                 {
                     var responseContent = await response.Content.ReadAsStringAsync();
 
-                    estado = JsonConvert.DeserializeObject<EstadoViewModel>(responseContent);
+                    amigo = JsonConvert.DeserializeObject<FriendViewModel>(responseContent);
 
-                    return View(estado);
+                    return View(amigo);
                 }
             }
 
-            return View();
+            return View("Error");
         }
 
         [HttpPost]
@@ -209,7 +255,7 @@ namespace MVC.Controllers
             {
                 client.BaseAddress = new Uri(base_url);
 
-                var response = await client.DeleteAsync($"api/State/{id}");
+                var response = await client.DeleteAsync($"api/Friend/{id}");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -217,7 +263,7 @@ namespace MVC.Controllers
                 }
                 else
                 {
-                    return View();
+                    return View("Error");
                 }
             }
         }
@@ -225,25 +271,25 @@ namespace MVC.Controllers
         [HttpGet]
         public async Task<ActionResult> Details(string id)
         {
-            EstadoViewModel estado = new EstadoViewModel();
+            FriendViewModel amigo = new FriendViewModel();
 
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(base_url);
 
-                var response = await client.GetAsync($"api/State/{id}");
+                var response = await client.GetAsync($"api/Friend?id_user={id}");
 
                 if (response.IsSuccessStatusCode)
                 {
                     var responseContent = await response.Content.ReadAsStringAsync();
 
-                    estado = JsonConvert.DeserializeObject<EstadoViewModel>(responseContent);
+                    amigo = JsonConvert.DeserializeObject<FriendViewModel>(responseContent);
 
-                    return View(estado);
+                    return View(amigo);
                 }
             }
 
-            return View();
+            return View("Error");
         }
     }
 }

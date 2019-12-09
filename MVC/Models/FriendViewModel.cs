@@ -11,7 +11,9 @@ namespace MVC.Models
         public string Name { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public string Tel { get; set; }
+        public string Telephone { get; set; }
         public string BirthDate { get; set; }
+        public PaisViewModel Country { get; set; }
+        public EstadoViewModel State { get; set; }
     }
 }
