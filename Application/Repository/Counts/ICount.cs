@@ -8,5 +8,6 @@ using System.Threading.Tasks;
 namespace Application.Repository.Counts {
     public interface ICount {
         Task<Count> Sum();
+        Task<Count> SumSP();
     }
 }

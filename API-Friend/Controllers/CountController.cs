@@ -31,7 +31,7 @@ namespace API_Friend.Controllers {
 
         [HttpGet]
         public async Task<IHttpActionResult> Show() {
-            var total = await GetFriendCount.Sum();
+            var total = await GetFriendCount.SumSP();
             return Ok(total);
         }
     }
