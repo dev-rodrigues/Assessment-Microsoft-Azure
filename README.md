@@ -70,6 +70,17 @@ where		Id in	(
 RETURN 0
 ```
 
+## SCRIPT STORED PROCEDURE `APAGAR FRIEND`
+```
+CREATE PROCEDURE [dbo].[Delete_friend]
+	@id_friend int
+AS
+delete
+from		dbo.Friends	
+where		Id = @id_friend
+RETURN 0
+```
+
 ## Para atualizar o banco de dados
 ```
 Ferramentas > Gerenciados de Pacotes do NuGet > Console do Gerenciador de Pacotes
