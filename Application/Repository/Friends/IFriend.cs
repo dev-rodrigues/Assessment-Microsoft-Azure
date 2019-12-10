@@ -10,6 +10,7 @@ namespace Application.Repository.Territory.Friends {
         Task<Friend> Save(Friend country);
         Task<Friend> Update(Friend country);
         Task<bool> Delete(Friend country);
+        bool DeleteSP(int id_friend);
         Task<Friend> Find(int id_country);
         List<Friend> Index();
     }

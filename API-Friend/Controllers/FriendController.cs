@@ -104,7 +104,7 @@ namespace API_Friend.Controllers {
         public async Task<IHttpActionResult> Delete(int id_user) {
             var localized_friend = await GetFriendRepository.Find(id_user);
 
-            var deleted = await GetFriendRepository.Delete(localized_friend);
+            var deleted = GetFriendRepository.DeleteSP(localized_friend.Id);
             if(deleted) {
                 return Ok();
             }
