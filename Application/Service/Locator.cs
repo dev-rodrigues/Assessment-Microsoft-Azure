@@ -1,4 +1,5 @@
-﻿using Application.Repository.Friendships;
+﻿using Application.Repository.Counts;
+using Application.Repository.Friendships;
 using Application.Repository.Territory.Countries;
 using Application.Repository.Territory.Friends;
 using Application.Repository.Territory.States;
@@ -24,6 +25,10 @@ namespace Application.Service {
 
         private static Dictionary<Type, Type> Friendships = new Dictionary<Type, Type> {
             [typeof(IFriendship)] = typeof(FriendshipRepository)
+        };
+
+        private static Dictionary<Type, Type> SumFriends = new Dictionary<Type, Type> {
+            [typeof(IFriendCount)] = typeof(FriendCountRepository)
         };
 
         public static T GetInstanceOf<T>() {
