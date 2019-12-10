@@ -21,7 +21,9 @@ namespace MVC.Controllers {
                 if(response.IsSuccessStatusCode) {
                     var responseContent = await response.Content.ReadAsStringAsync();
                     resultado = JsonConvert.DeserializeObject<OutputSomatorioModel>(responseContent);
-                    ViewBag.Somatorio = resultado;
+                    ViewBag.SomatorioUsuario = resultado.SumFriend;
+                    ViewBag.SomatorioPais = resultado.SumCountry;
+                    ViewBag.SomatorioEstado = resultado.SumState;
                     return View();
                 }
             }

@@ -1,4 +1,23 @@
 ﻿@{
     ViewBag.Title = "Home Page";
+    var sum_user = ViewBag.SomatorioUsuario;
+    var sum_country = ViewBag.SomatorioPais;
+    var sum_state = ViewBag.SomatorioEstado;
 }
 
+<div>
+    <div>
+        <h1>Usuários cadastrados</h1>
+        <h2>@sum_user</h2>
+    </div>
+
+    <div>
+        <h1>Países cadastrados</h1>
+        <h2>@sum_country</h2>
+    </div>
+
+    <div>
+        <h1>Estados cadastrados</h1>
+        <h2>@sum_state</h2>
+    </div>
+</div>
