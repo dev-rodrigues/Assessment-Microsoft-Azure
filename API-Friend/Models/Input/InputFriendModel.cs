@@ -16,6 +16,7 @@ namespace API_Friend.Models.Input {
 
         public int IdCountry { get; set; }
         public int IdState { get; set; }
+        public string IdImg { get; set; }
 
         public static Friend CreateFriend(InputFriendModel input, Country country, State state) {
             return new Friend() {
@@ -25,7 +26,8 @@ namespace API_Friend.Models.Input {
                 Email = input.Email,
                 BirthDate = Convert.ToDateTime(input.BirthDate),
                 Country = country,
-                State = state
+                State = state,
+                URLImg = @"https://gabrielcouto26.blob.core.windows.net/api-amigo-fotos/" + input.IdImg + ".png",
             };
         }
     }

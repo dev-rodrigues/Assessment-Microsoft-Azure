@@ -104,6 +104,7 @@ namespace MVC.Controllers {
                     {"BirthDate", collection["Amigo.BirthDate"]},
                     {"IdCountry", collection["paises"]},
                     {"IdState", collection["estados"]},
+                    {"IdImg", code_img }
                 };
 
                 using(var client = new HttpClient()) {
