@@ -81,6 +81,19 @@ where		Id = @id_friend
 RETURN 0
 ```
 
+## SCRIPT STORED PROCEDURE `APAGAR COUNTRY`
+```
+CREATE PROCEDURE [dbo].[Delete_Country]
+	@id_country int
+AS
+
+delete
+from		dbo.Countries
+where		id = @id_country
+
+RETURN 0
+```
+
 ## Para atualizar o banco de dados
 ```
 Ferramentas > Gerenciados de Pacotes do NuGet > Console do Gerenciador de Pacotes
