@@ -34,7 +34,6 @@ namespace MVC.Controllers {
                     return View(amigos);
                 }
             }
-
             return View("Error");
         }
 
