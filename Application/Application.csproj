@@ -58,6 +58,14 @@
     <Compile Include="Migrations\201912100303209_init.designer.cs">
       <DependentUpon>201912100303209_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912100321342_friendship.cs" />
+    <Compile Include="Migrations\201912100321342_friendship.designer.cs">
+      <DependentUpon>201912100321342_friendship.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912100343038_friendship1.cs" />
+    <Compile Include="Migrations\201912100343038_friendship1.designer.cs">
+      <DependentUpon>201912100343038_friendship1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Friendships\Friendship.cs" />
     <Compile Include="Models\Friends\Friend.cs" />
@@ -81,6 +89,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201912100303209_init.resx">
       <DependentUpon>201912100303209_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912100321342_friendship.resx">
+      <DependentUpon>201912100321342_friendship.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912100343038_friendship1.resx">
+      <DependentUpon>201912100343038_friendship1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

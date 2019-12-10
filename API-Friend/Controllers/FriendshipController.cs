@@ -1,5 +1,7 @@
 ﻿using API_Friend.Models.Input;
 using API_Friend.Models.Output;
+using Application.Models.Friendships;
+using Application.Repository.Friendships;
 using Application.Repository.Territory.Countries;
 using Application.Repository.Territory.Friends;
 using Application.Repository.Territory.States;
@@ -22,30 +24,37 @@ namespace API_Friend.Controllers {
     public class FriendshipController : ApiController {
 
         private IFriend GetFriendRepository { get; }
+        private IFriendship GetFriendship { get; }
 
         public FriendshipController() {
             this.GetFriendRepository = Locator.GetInstanceOf<FriendRepository>();
+            this.GetFriendship = Locator.GetInstanceOf<FriendshipRepository>();
         }
 
         [HttpPost]
         public async Task<IHttpActionResult> Store(InputFriendshipModel input) {
-            var localized_follower = await GetFriendRepository.Find(input.IdFollower);
-            var localized_followed = await GetFriendRepository.Find(input.IdFollowed);
+            var seguidor = await GetFriendRepository.Find(input.IdFollower);
+            var seguido = await GetFriendRepository.Find(input.IdFollowed);
 
-            if(localized_followed == null || localized_follower == null) {
+            if(seguido == null || seguidor == null) {
                 return BadRequest("Erro ao processar a solicitação");
             }
 
-
-            if(localized_followed.Id == localized_follower.Id) {
+            if(seguido.Id == seguidor.Id) {
                 return BadRequest("Erro ao processar a solicitação");
             }
 
+             var friendship = new Friendship() {
+                 Follower = seguido,
+                 Followed = seguidor,
+            };
 
-            //if(user_updated != null) {
-            //    var converted_friend = OutputFriendModel.CreateOutputFriend(user_updated);
-            //    return Ok(converted_friend);
-            //}
+            var saved_friendship = GetFriendship.Save(friendship);
+
+
+            if(saved_friendship != null) {
+                return Ok();
+            }
             return BadRequest("Erro ao processar a solicitação");
         }
 

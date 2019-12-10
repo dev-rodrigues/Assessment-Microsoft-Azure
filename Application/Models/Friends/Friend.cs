@@ -1,4 +1,5 @@
-﻿using Application.Models.Territory.Countries;
+﻿using Application.Models.Friendships;
+using Application.Models.Territory.Countries;
 using Application.Models.Territory.States;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace Application.Models.Friends {
     public class Friend {
         public Friend() {
             //this.Friends = new HashSet<Friend>();
+            //Friendships = new HashSet<Friendship>();
         }
 
         public int Id { get; set; }
@@ -21,6 +23,7 @@ namespace Application.Models.Friends {
         public DateTime BirthDate { get; set; }
 
         //public virtual ICollection<Friend> Friends { get; set; }
+        //public virtual ICollection<Friendship> Friendships { get; set; }
 
         [ForeignKey("Country")]
         public int CountryId { get; set; }
