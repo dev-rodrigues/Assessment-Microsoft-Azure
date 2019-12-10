@@ -53,6 +53,23 @@ AS
 	select @pais as SUM_PAIS, @estado AS SUM_ESTADO, @amigos AS SUM_AMIGOS
 ```
 
+##SCRIPT STORED PROCEDURE `APAGAR AMIZADE`
+```
+CREATE PROCEDURE [dbo].[Delete_Amizade]
+	@id_user as int
+AS
+delete
+from		dbo.Friendships		
+where		Id in	(
+				select		fs.Id
+				from		dbo.Friendships		fs
+				where		(1=1)
+					and	fs.Follower_Id = @id_user
+					or	fs.Followed_Id = @id_user		
+			)
+RETURN 0
+```
+
 ## Para atualizar o banco de dados
 ```
 Ferramentas > Gerenciados de Pacotes do NuGet > Console do Gerenciador de Pacotes
