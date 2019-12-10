@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Application.Models.Friends {
     public class Friend {
         public Friend() {
-            this.Connections = new HashSet<Connection>();
+            //this.Friends = new HashSet<Friend>();
         }
 
         public int Id { get; set; }
@@ -20,7 +20,7 @@ namespace Application.Models.Friends {
         public string Telephone { get; set; }
         public DateTime BirthDate { get; set; }
 
-        public virtual ICollection<Connection> Connections { get; set; }
+        //public virtual ICollection<Friend> Friends { get; set; }
 
         [ForeignKey("Country")]
         public int CountryId { get; set; }

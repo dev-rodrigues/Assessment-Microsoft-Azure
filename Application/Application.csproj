@@ -10,11 +10,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Application</RootNamespace>
     <AssemblyName>Application</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -53,16 +54,18 @@
   <ItemGroup>
     <Compile Include="Context\Database.cs" />
     <Compile Include="Context\DatabaseContext.cs" />
-    <Compile Include="Migrations\201912100009551_init.cs" />
-    <Compile Include="Migrations\201912100009551_init.designer.cs">
-      <DependentUpon>201912100009551_init.cs</DependentUpon>
+    <Compile Include="Migrations\201912090227558_init.cs" />
+    <Compile Include="Migrations\201912090227558_init.designer.cs">
+      <DependentUpon>201912090227558_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Friends\Connection.cs" />
+    <Compile Include="Models\Friendships\Friendship.cs" />
     <Compile Include="Models\Friends\Friend.cs" />
     <Compile Include="Models\Territory\Countries\Country.cs" />
     <Compile Include="Models\Territory\States\State.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Friendships\FriendshipRepository.cs" />
+    <Compile Include="Repository\Friendships\IFriendship.cs" />
     <Compile Include="Repository\Territory\Countries\CountryRepository.cs" />
     <Compile Include="Repository\Territory\Countries\ICountry.cs" />
     <Compile Include="Repository\Friends\FriendRepository.cs" />
@@ -76,8 +79,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201912100009551_init.resx">
-      <DependentUpon>201912100009551_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201912090227558_init.resx">
+      <DependentUpon>201912090227558_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

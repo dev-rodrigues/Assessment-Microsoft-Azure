@@ -8,42 +8,6 @@
         public override void Up()
         {
             CreateTable(
-                "dbo.Connections",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Friend_Id = c.Int(),
-                        Seguido_Id = c.Int(),
-                        Seguidor_Id = c.Int(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Friends", t => t.Friend_Id)
-                .ForeignKey("dbo.Friends", t => t.Seguido_Id)
-                .ForeignKey("dbo.Friends", t => t.Seguidor_Id)
-                .Index(t => t.Friend_Id)
-                .Index(t => t.Seguido_Id)
-                .Index(t => t.Seguidor_Id);
-            
-            CreateTable(
-                "dbo.Friends",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        LastName = c.String(),
-                        Email = c.String(),
-                        Telephone = c.String(),
-                        BirthDate = c.DateTime(nullable: false),
-                        CountryId = c.Int(nullable: false),
-                        StateId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Countries", t => t.CountryId, cascadeDelete: false)
-                .ForeignKey("dbo.States", t => t.StateId, cascadeDelete: true)
-                .Index(t => t.CountryId)
-                .Index(t => t.StateId);
-            
-            CreateTable(
                 "dbo.Countries",
                 c => new
                     {
@@ -63,29 +27,60 @@
                         CountryId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Countries", t => t.CountryId, cascadeDelete: false)
+                .ForeignKey("dbo.Countries", t => t.CountryId, cascadeDelete: true)
                 .Index(t => t.CountryId);
+            
+            CreateTable(
+                "dbo.Friends",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        LastName = c.String(),
+                        Email = c.String(),
+                        Telephone = c.String(),
+                        BirthDate = c.DateTime(nullable: false),
+                        CountryId = c.Int(nullable: false),
+                        StateId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Countries", t => t.CountryId, cascadeDelete: false)
+                .ForeignKey("dbo.States", t => t.StateId, cascadeDelete: false)
+                .Index(t => t.CountryId)
+                .Index(t => t.StateId);
+            
+            CreateTable(
+                "dbo.Friendships",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Followed_Id = c.Int(),
+                        Follower_Id = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Friends", t => t.Followed_Id)
+                .ForeignKey("dbo.Friends", t => t.Follower_Id)
+                .Index(t => t.Followed_Id)
+                .Index(t => t.Follower_Id);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Connections", "Seguidor_Id", "dbo.Friends");
-            DropForeignKey("dbo.Connections", "Seguido_Id", "dbo.Friends");
+            DropForeignKey("dbo.Friendships", "Follower_Id", "dbo.Friends");
+            DropForeignKey("dbo.Friendships", "Followed_Id", "dbo.Friends");
             DropForeignKey("dbo.Friends", "StateId", "dbo.States");
             DropForeignKey("dbo.Friends", "CountryId", "dbo.Countries");
             DropForeignKey("dbo.States", "CountryId", "dbo.Countries");
-            DropForeignKey("dbo.Connections", "Friend_Id", "dbo.Friends");
-            DropIndex("dbo.States", new[] { "CountryId" });
+            DropIndex("dbo.Friendships", new[] { "Follower_Id" });
+            DropIndex("dbo.Friendships", new[] { "Followed_Id" });
             DropIndex("dbo.Friends", new[] { "StateId" });
             DropIndex("dbo.Friends", new[] { "CountryId" });
-            DropIndex("dbo.Connections", new[] { "Seguidor_Id" });
-            DropIndex("dbo.Connections", new[] { "Seguido_Id" });
-            DropIndex("dbo.Connections", new[] { "Friend_Id" });
+            DropIndex("dbo.States", new[] { "CountryId" });
+            DropTable("dbo.Friendships");
+            DropTable("dbo.Friends");
             DropTable("dbo.States");
             DropTable("dbo.Countries");
-            DropTable("dbo.Friends");
-            DropTable("dbo.Connections");
         }
     }
 }
