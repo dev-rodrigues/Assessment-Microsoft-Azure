@@ -1,5 +1,6 @@
 ﻿using MVC.Models;
 using MVC.Models.edit;
+using MVC.Service;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,26 +10,21 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace MVC.Controllers
-{
-    public class EstadoController : Controller
-    {
+namespace MVC.Controllers {
+    public class EstadoController : Controller {
         private readonly string base_url = "http://localhost:54595";
 
         // GET: State
         [HttpGet]
-        public async Task<ActionResult> Index()
-        {
+        public async Task<ActionResult> Index() {
             var estados = new List<EstadoViewModel>();
 
-            using (var client = new HttpClient())
-            {
+            using(var client = new HttpClient()) {
                 client.BaseAddress = new Uri(base_url);
 
                 var response = await client.GetAsync("api/State");
 
-                if (response.IsSuccessStatusCode)
-                {
+                if(response.IsSuccessStatusCode) {
                     var responseContent = await response.Content.ReadAsStringAsync();
 
                     estados = JsonConvert.DeserializeObject<List<EstadoViewModel>>(responseContent);
@@ -41,20 +37,17 @@ namespace MVC.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Create()
-        {
+        public async Task<ActionResult> Create() {
             var paises = new List<PaisViewModel>();
             CreateEstadoViewModel estado = new CreateEstadoViewModel();
             bool pegouPaises = false;
 
-            using (var client = new HttpClient())
-            {
+            using(var client = new HttpClient()) {
                 client.BaseAddress = new Uri(base_url);
 
                 var response = await client.GetAsync("api/Country");
 
-                if (response.IsSuccessStatusCode)
-                {
+                if(response.IsSuccessStatusCode) {
                     var responseContent = await response.Content.ReadAsStringAsync();
 
                     paises = JsonConvert.DeserializeObject<List<PaisViewModel>>(responseContent);
@@ -73,49 +66,47 @@ namespace MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(FormCollection collection)
-        {
-            var data = new Dictionary<string, string>
-            {
-                {"Name", collection["Estado.Name"]},
-                {"IdImage", collection["Estado.IdImage"]},
-                {"Id_Country", collection["paises"] } 
-            };
+        public async Task<ActionResult> Create(FormCollection collection, HttpPostedFileBase foto) {
 
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(base_url);
+            if(foto != null) {
+                string code_img = Guid.NewGuid().ToString();
+                new UploadAzure().UploadDeArquivo(foto.InputStream, $"{code_img}.png");
 
-                using (var requestContent = new FormUrlEncodedContent(data))
+                var data = new Dictionary<string, string>
                 {
-                    var response = await client.PostAsync("api/State", requestContent);
+                    {"Name", collection["Estado.Name"]},
+                    {"IdImage", code_img},
+                    {"Id_Country", collection["paises"] }
+                };
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        return RedirectToAction("Index");
+                using(var client = new HttpClient()) {
+                    client.BaseAddress = new Uri(base_url);
+
+                    using(var requestContent = new FormUrlEncodedContent(data)) {
+                        var response = await client.PostAsync("api/State", requestContent);
+
+                        if(response.IsSuccessStatusCode) {
+                            return RedirectToAction("Index");
+                        }
                     }
                 }
             }
-
             return View("Error");
         }
 
         [HttpGet]
-        public async Task<ActionResult> Edit(string id)
-        {
+        public async Task<ActionResult> Edit(string id) {
             EditEstadoViewModel EditEstado = new EditEstadoViewModel();
             bool pegouPaises = false;
             bool pegouEstado = false;
 
             // pegou paises
-            using (var client = new HttpClient())
-            {
+            using(var client = new HttpClient()) {
                 client.BaseAddress = new Uri(base_url);
 
                 var response = await client.GetAsync("api/Country");
 
-                if (response.IsSuccessStatusCode)
-                {
+                if(response.IsSuccessStatusCode) {
                     var responseContent = await response.Content.ReadAsStringAsync();
 
                     EditEstado.Paises = JsonConvert.DeserializeObject<List<PaisViewModel>>(responseContent);
@@ -125,14 +116,12 @@ namespace MVC.Controllers
             }
 
             // pegou estado
-            using (var client = new HttpClient())
-            {
+            using(var client = new HttpClient()) {
                 client.BaseAddress = new Uri(base_url);
 
                 var response = await client.GetAsync($"api/State/{id}");
 
-                if (response.IsSuccessStatusCode)
-                {
+                if(response.IsSuccessStatusCode) {
                     var responseContent = await response.Content.ReadAsStringAsync();
 
                     EditEstado.Estado = JsonConvert.DeserializeObject<EstadoViewModel>(responseContent);
@@ -149,8 +138,7 @@ namespace MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Edit(FormCollection collection, string id)
-        {
+        public async Task<ActionResult> Edit(FormCollection collection, string id) {
             var data = new Dictionary<string, string>
             {
                 {"Name", collection["EditEstado.Name"]},
@@ -158,20 +146,15 @@ namespace MVC.Controllers
                 {"Id_Country", collection["paises"] }
             };
 
-            using (var client = new HttpClient())
-            {
+            using(var client = new HttpClient()) {
                 client.BaseAddress = new Uri(base_url);
 
-                using (var requestContent = new FormUrlEncodedContent(data))
-                {
+                using(var requestContent = new FormUrlEncodedContent(data)) {
                     var response = await client.PutAsync($"api/State/{id}", requestContent);
 
-                    if (response.IsSuccessStatusCode)
-                    {
+                    if(response.IsSuccessStatusCode) {
                         return RedirectToAction("Index");
-                    }
-                    else
-                    {
+                    } else {
                         return View();
                     }
                 }
@@ -179,18 +162,15 @@ namespace MVC.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Delete(string id)
-        {
+        public async Task<ActionResult> Delete(string id) {
             EstadoViewModel estado = new EstadoViewModel();
 
-            using (var client = new HttpClient())
-            {
+            using(var client = new HttpClient()) {
                 client.BaseAddress = new Uri(base_url);
 
                 var response = await client.GetAsync($"api/State/{id}");
 
-                if (response.IsSuccessStatusCode)
-                {
+                if(response.IsSuccessStatusCode) {
                     var responseContent = await response.Content.ReadAsStringAsync();
 
                     estado = JsonConvert.DeserializeObject<EstadoViewModel>(responseContent);
@@ -203,38 +183,30 @@ namespace MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Delete(string id, FormCollection form)
-        {
-            using (var client = new HttpClient())
-            {
+        public async Task<ActionResult> Delete(string id, FormCollection form) {
+            using(var client = new HttpClient()) {
                 client.BaseAddress = new Uri(base_url);
 
                 var response = await client.DeleteAsync($"api/State/{id}");
 
-                if (response.IsSuccessStatusCode)
-                {
+                if(response.IsSuccessStatusCode) {
                     return RedirectToAction("Index");
-                }
-                else
-                {
+                } else {
                     return View();
                 }
             }
         }
 
         [HttpGet]
-        public async Task<ActionResult> Details(string id)
-        {
+        public async Task<ActionResult> Details(string id) {
             EstadoViewModel estado = new EstadoViewModel();
 
-            using (var client = new HttpClient())
-            {
+            using(var client = new HttpClient()) {
                 client.BaseAddress = new Uri(base_url);
 
                 var response = await client.GetAsync($"api/State/{id}");
 
-                if (response.IsSuccessStatusCode)
-                {
+                if(response.IsSuccessStatusCode) {
                     var responseContent = await response.Content.ReadAsStringAsync();
 
                     estado = JsonConvert.DeserializeObject<EstadoViewModel>(responseContent);

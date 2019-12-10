@@ -6,48 +6,52 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) 
-{
+<form action="/estado/create/" method="post" enctype="multipart/form-data">
+
+    /**/
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <hr />
-    <div class="form-group">
-        @Html.LabelFor(model => model.Estado.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Estado.Name, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Estado.Name, "", new { @class = "text-danger" })
-        </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Estado.IdImage, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Estado.IdImage, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Estado.IdImage, "", new { @class = "text-danger" })
+    <div class="form-horizontal">
+        <hr />
+        <div class="form-group">
+            @Html.LabelFor(model => model.Estado.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Estado.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Estado.Name, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-2">País</label>
-        <div class="col-md-10">
-            <select name="paises">
-                <option selected>Selecione o país</option>
-                @foreach (var pais in Model.Paises)
-                {
-                    <option value="@pais.Id" name="paisId">@pais.Name</option>
-                }
-            </select>
-        </div>
-    </div>
 
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+        <div class="form-group">
+            @Html.LabelFor(model => model.Estado.IdImage, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.Estado.IdImage, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Estado.IdImage, "", new { @class = "text-danger" })*@
+
+                <input type="file" name="foto" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">País</label>
+            <div class="col-md-10">
+                <select name="paises">
+                    <option selected>Selecione o país</option>
+                    @foreach(var pais in Model.Paises) {
+
+                        /**/
+                        <option value="@pais.Id" name="paisId">@pais.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
         </div>
     </div>
-</div>
-}
+</form>
 
 <div>
     @Html.ActionLink("Back to List", "Index")
