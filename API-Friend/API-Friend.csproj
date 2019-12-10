@@ -172,6 +172,7 @@
     </Compile>
     <Compile Include="Models\Input\InputFriendModel.cs" />
     <Compile Include="Models\Input\InputFriendshipModel.cs" />
+    <Compile Include="Models\Output\OutputConnection.cs" />
     <Compile Include="Models\Output\OutputCountryModel.cs" />
     <Compile Include="Models\Output\OutputFriendModel.cs" />
     <Compile Include="Models\Output\OutputSingleFriendModel.cs" />

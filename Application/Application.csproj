@@ -68,6 +68,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Friendships\Friendship.cs" />
+    <Compile Include="Models\Friendships\FriendshipDTO.cs" />
     <Compile Include="Models\Friends\Friend.cs" />
     <Compile Include="Models\Territory\Countries\Country.cs" />
     <Compile Include="Models\Territory\States\State.cs" />

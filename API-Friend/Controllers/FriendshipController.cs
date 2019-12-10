@@ -59,56 +59,51 @@ namespace API_Friend.Controllers {
         }
 
         [HttpGet]
-        public async Task<IHttpActionResult> Show(int id_user) {
+        public IHttpActionResult Show(int id_user) {
 
             var my_friends = GetFriendship.Friends(id_user);
 
             if(my_friends != null) {
-                var retorno = OutputSingleFriendModel.FriendModels(my_friends);
+                var retorno = OutputConnection.Connections(my_friends);
                 return Ok(retorno);
             }
 
             return BadRequest("Erro ao processar a solicitação");
         }
 
-        //[HttpPut]
-        //public async Task<IHttpActionResult> Update(InputFriendshipModel input) {
-        //    var Followed = await GetFriendRepository.Find(input.IdFollowed);
-        //    var Follower = await GetFriendRepository.Find(input.IdFollower);
+        [HttpPut]
+        public async Task<IHttpActionResult> Update(int id_connection, InputFriendshipModel input) {
+            var old_connection = await GetFriendship.Find(id_connection);
 
-        //    if(!Followed.Friends.Contains(Follower)) {
-        //        return BadRequest("Erro ao processar a solicitação");
-        //    }
+            var seguido = await GetFriendRepository.Find(input.IdFollowed);
 
-        //    Followed.Friends.Remove(Follower);
-        //    var user_updated = await GetFriendRepository.Update(Followed);
+            if(seguido == null || old_connection == null) {
+                return BadRequest("Erro ao processar a solicitação");
+            }
 
-        //    if(user_updated != null) {
-        //        var converted_friend = OutputFriendModel.CreateOutputFriend(user_updated);
-        //        return Ok(converted_friend);
-        //    }
+            if(seguido.Id == old_connection.Follower.Id) {
+                return BadRequest("Erro ao processar a solicitação");
+            }
 
-        //    return BadRequest("Erro ao processar a solicitação");
-        //}
+            old_connection.Followed = seguido;
 
-        //[HttpDelete]
-        //public async Task<IHttpActionResult> Delete(InputFriendshipModel input) {
-        //    var Followed = await GetFriendRepository.Find(input.IdFollowed);
-        //    var Follower = await GetFriendRepository.Find(input.IdFollower);
+            var updated_connection = GetFriendship.Update(old_connection);
 
-        //    if(!Followed.Friends.Contains(Follower)) {
-        //        return BadRequest("Erro ao processar a solicitação");
-        //    }
+            if(updated_connection != null) {
+                return Ok();
+            }
 
-        //    Followed.Friends.Remove(Follower);
-        //    var user_updated = await GetFriendRepository.Update(Followed);
+            return BadRequest("Erro ao processar a solicitação");
+        }
 
-        //    if(user_updated != null) {
-        //        var converted_friend = OutputFriendModel.CreateOutputFriend(user_updated);
-        //        return Ok(converted_friend);
-        //    }
-
-        //    return BadRequest("Erro ao processar a solicitação");
-        //}
+        [HttpDelete]
+        public async Task<IHttpActionResult> Delete(int id_connection) {
+            var connection = await GetFriendship.Find(id_connection);
+            var apagou = await GetFriendship.Delete(connection);
+            if(apagou) {
+                return Ok();
+            }
+            return BadRequest("Erro ao processar a solicitação");
+        }
     }
 }
