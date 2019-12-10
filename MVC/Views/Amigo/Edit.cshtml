@@ -62,8 +62,7 @@
         <div class="col-md-10">
             <select name="paises">
                 <option selected>Selecione o país</option>
-                @foreach (var pais in Model.Paises)
-                {
+                @foreach(var pais in Model.Paises) {
                     <option value="@pais.Id" name="paisId">@pais.Name</option>
                 }
             </select>
@@ -71,12 +70,11 @@
     </div>
 
     <div class="form-group">
-        <label class="control-label col-md-2">País</label>
+        <label class="control-label col-md-2">Estado</label>
         <div class="col-md-10">
             <select name="estados">
-                <option selected>Selecione o país</option>
-                @foreach (var estado in Model.Estados)
-                {
+                <option selected>Selecione o estado</option>
+                @foreach(var estado in Model.Estados) {
                     <option value="@estado.Id" name="paisId">@estado.Name</option>
                 }
             </select>

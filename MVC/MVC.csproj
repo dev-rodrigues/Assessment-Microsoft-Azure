@@ -127,12 +127,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AmigoController.cs" />
+    <Compile Include="Controllers\ConexaoController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\EstadoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ConexaoViewModel.cs" />
     <Compile Include="Models\create\CreateAmigoViewModel.cs" />
     <Compile Include="Models\create\CreateEstadoViewModel.cs" />
     <Compile Include="Models\edit\EditAmigoViewModel.cs" />
@@ -193,6 +195,7 @@
     <Content Include="Views\Amigo\Edit.cshtml" />
     <Content Include="Views\Amigo\Delete.cshtml" />
     <Content Include="Views\Amigo\Details.cshtml" />
+    <Content Include="Views\Conexao\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

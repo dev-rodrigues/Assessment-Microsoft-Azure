@@ -124,7 +124,9 @@ namespace MVC.Controllers {
 
         [HttpGet]
         public async Task<ActionResult> Edit(string id) {
+
             EditAmigoViewModel EditAmigo = new EditAmigoViewModel();
+            var amigos = new List<FriendViewModel>();
             bool pegouPaises = false;
             bool pegouEstados = false;
             bool pegouUser = false;
