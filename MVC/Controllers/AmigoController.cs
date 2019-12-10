@@ -257,7 +257,7 @@ namespace MVC.Controllers
             {
                 client.BaseAddress = new Uri(base_url_amigo);
 
-                var response = await client.DeleteAsync($"api/Friend/{id}");
+                var response = await client.DeleteAsync($"api/Friend?id_user={id}");
 
                 if (response.IsSuccessStatusCode)
                 {
