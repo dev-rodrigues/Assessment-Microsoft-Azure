@@ -1,5 +1,6 @@
 ﻿using MVC.Models;
 using MVC.Models.edit;
+using MVC.Service;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,28 +10,23 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace MVC.Controllers
-{
-    public class AmigoController : Controller
-    {
+namespace MVC.Controllers {
+    public class AmigoController : Controller {
         private readonly string base_url_amigo = "http://localhost:52353";
         private readonly string base_url_pais_estado = "http://localhost:54595";
 
 
         // GET: Country
         [HttpGet]
-        public async Task<ActionResult> Index()
-        {
+        public async Task<ActionResult> Index() {
             var amigos = new List<FriendViewModel>();
 
-            using (var client = new HttpClient())
-            {
+            using(var client = new HttpClient()) {
                 client.BaseAddress = new Uri(base_url_amigo);
 
                 var response = await client.GetAsync("api/Friend");
 
-                if (response.IsSuccessStatusCode)
-                {
+                if(response.IsSuccessStatusCode) {
                     var responseContent = await response.Content.ReadAsStringAsync();
 
                     amigos = JsonConvert.DeserializeObject<List<FriendViewModel>>(responseContent);
@@ -43,8 +39,7 @@ namespace MVC.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Create()
-        {
+        public async Task<ActionResult> Create() {
             var paises = new List<PaisViewModel>();
             var estados = new List<EstadoViewModel>();
             CreateAmigoViewModel amigo = new CreateAmigoViewModel();
@@ -52,14 +47,12 @@ namespace MVC.Controllers
             bool pegouEstados = false;
 
             // pega pais
-            using (var client = new HttpClient())
-            {
+            using(var client = new HttpClient()) {
                 client.BaseAddress = new Uri(base_url_pais_estado);
 
                 var response = await client.GetAsync("api/Country");
 
-                if (response.IsSuccessStatusCode)
-                {
+                if(response.IsSuccessStatusCode) {
                     var responseContent = await response.Content.ReadAsStringAsync();
 
                     paises = JsonConvert.DeserializeObject<List<PaisViewModel>>(responseContent);
@@ -71,14 +64,12 @@ namespace MVC.Controllers
             }
 
             // pega estado
-            using (var client = new HttpClient())
-            {
+            using(var client = new HttpClient()) {
                 client.BaseAddress = new Uri(base_url_pais_estado);
 
                 var response = await client.GetAsync("api/State");
 
-                if (response.IsSuccessStatusCode)
-                {
+                if(response.IsSuccessStatusCode) {
                     var responseContent = await response.Content.ReadAsStringAsync();
 
                     estados = JsonConvert.DeserializeObject<List<EstadoViewModel>>(responseContent);
@@ -96,53 +87,55 @@ namespace MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(FormCollection collection)
-        {
-            var data = new Dictionary<string, string>
-            {
-                {"Name", collection["Amigo.Name"]},
-                {"LastName", collection["Amigo.LastName"]},
-                {"Email", collection["Amigo.Email"]},
-                {"Telephone", collection["Amigo.Telephone"]},
-                {"BirthDate", collection["Amigo.BirthDate"]},
-                {"IdCountry", collection["paises"]},
-                {"IdState", collection["estados"]},
-            };
+        public async Task<ActionResult> Create(FormCollection collection, HttpPostedFileBase foto) {
 
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(base_url_amigo);
+            if(foto != null) {
 
-                using (var requestContent = new FormUrlEncodedContent(data))
+                string code_img = Guid.NewGuid().ToString();
+                new UploadAzure().UploadDeArquivo(foto.InputStream, $"{code_img}.png");
+
+
+                var data = new Dictionary<string, string>
                 {
-                    var response = await client.PostAsync("api/Friend", requestContent);
+                    {"Name", collection["Amigo.Name"]},
+                    {"LastName", collection["Amigo.LastName"]},
+                    {"Email", collection["Amigo.Email"]},
+                    {"Telephone", collection["Amigo.Telephone"]},
+                    {"BirthDate", collection["Amigo.BirthDate"]},
+                    {"IdCountry", collection["paises"]},
+                    {"IdState", collection["estados"]},
+                };
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        return RedirectToAction("Index");
+                using(var client = new HttpClient()) {
+                    client.BaseAddress = new Uri(base_url_amigo);
+
+                    using(var requestContent = new FormUrlEncodedContent(data)) {
+                        var response = await client.PostAsync("api/Friend", requestContent);
+
+                        if(response.IsSuccessStatusCode) {
+                            return RedirectToAction("Index");
+                        }
                     }
                 }
+
             }
             return View("Error");
         }
 
         [HttpGet]
-        public async Task<ActionResult> Edit(string id)
-        {
+        public async Task<ActionResult> Edit(string id) {
             EditAmigoViewModel EditAmigo = new EditAmigoViewModel();
             bool pegouPaises = false;
             bool pegouEstados = false;
             bool pegouUser = false;
 
             // pega paises
-            using (var client = new HttpClient())
-            {
+            using(var client = new HttpClient()) {
                 client.BaseAddress = new Uri(base_url_pais_estado);
 
                 var response = await client.GetAsync("api/Country");
 
-                if (response.IsSuccessStatusCode)
-                {
+                if(response.IsSuccessStatusCode) {
                     var responseContent = await response.Content.ReadAsStringAsync();
 
                     EditAmigo.Paises = JsonConvert.DeserializeObject<List<PaisViewModel>>(responseContent);
@@ -152,14 +145,12 @@ namespace MVC.Controllers
             }
 
             // pega estados
-            using (var client = new HttpClient())
-            {
+            using(var client = new HttpClient()) {
                 client.BaseAddress = new Uri(base_url_pais_estado);
 
                 var response = await client.GetAsync("api/State");
 
-                if (response.IsSuccessStatusCode)
-                {
+                if(response.IsSuccessStatusCode) {
                     var responseContent = await response.Content.ReadAsStringAsync();
 
                     EditAmigo.Estados = JsonConvert.DeserializeObject<List<EstadoViewModel>>(responseContent);
@@ -169,14 +160,12 @@ namespace MVC.Controllers
             }
 
             // pega user
-            using (var client = new HttpClient())
-            {
+            using(var client = new HttpClient()) {
                 client.BaseAddress = new Uri(base_url_amigo);
 
                 var response = await client.GetAsync($"api/Friend?id_user={id}");
 
-                if (response.IsSuccessStatusCode)
-                {
+                if(response.IsSuccessStatusCode) {
                     var responseContent = await response.Content.ReadAsStringAsync();
 
                     EditAmigo.Amigo = JsonConvert.DeserializeObject<FriendViewModel>(responseContent);
@@ -185,7 +174,7 @@ namespace MVC.Controllers
                 }
             }
 
-            if (pegouPaises && pegouEstados && pegouUser)
+            if(pegouPaises && pegouEstados && pegouUser)
                 return View(EditAmigo);
             else
                 return View("Error");
@@ -193,8 +182,7 @@ namespace MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Edit(FormCollection collection, string id)
-        {
+        public async Task<ActionResult> Edit(FormCollection collection, string id) {
             var data = new Dictionary<string, string>
             {
                 {"Name", collection["Amigo.Name"]},
@@ -206,20 +194,15 @@ namespace MVC.Controllers
                 {"IdState", collection["estados"]},
             };
 
-            using (var client = new HttpClient())
-            {
+            using(var client = new HttpClient()) {
                 client.BaseAddress = new Uri(base_url_amigo);
 
-                using (var requestContent = new FormUrlEncodedContent(data))
-                {
+                using(var requestContent = new FormUrlEncodedContent(data)) {
                     var response = await client.PutAsync($"api/Friend?id_user={id}", requestContent);
 
-                    if (response.IsSuccessStatusCode)
-                    {
+                    if(response.IsSuccessStatusCode) {
                         return RedirectToAction("Index");
-                    }
-                    else
-                    {
+                    } else {
                         return View("Error");
                     }
                 }
@@ -227,18 +210,15 @@ namespace MVC.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Delete(string id)
-        {
+        public async Task<ActionResult> Delete(string id) {
             FriendViewModel amigo = new FriendViewModel();
 
-            using (var client = new HttpClient())
-            {
+            using(var client = new HttpClient()) {
                 client.BaseAddress = new Uri(base_url_amigo);
 
                 var response = await client.GetAsync($"api/Friend?id_user={id}");
 
-                if (response.IsSuccessStatusCode)
-                {
+                if(response.IsSuccessStatusCode) {
                     var responseContent = await response.Content.ReadAsStringAsync();
 
                     amigo = JsonConvert.DeserializeObject<FriendViewModel>(responseContent);
@@ -251,38 +231,30 @@ namespace MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Delete(string id, FormCollection form)
-        {
-            using (var client = new HttpClient())
-            {
+        public async Task<ActionResult> Delete(string id, FormCollection form) {
+            using(var client = new HttpClient()) {
                 client.BaseAddress = new Uri(base_url_amigo);
 
                 var response = await client.DeleteAsync($"api/Friend?id_user={id}");
 
-                if (response.IsSuccessStatusCode)
-                {
+                if(response.IsSuccessStatusCode) {
                     return RedirectToAction("Index");
-                }
-                else
-                {
+                } else {
                     return View("Error");
                 }
             }
         }
 
         [HttpGet]
-        public async Task<ActionResult> Details(string id)
-        {
+        public async Task<ActionResult> Details(string id) {
             FriendViewModel amigo = new FriendViewModel();
 
-            using (var client = new HttpClient())
-            {
+            using(var client = new HttpClient()) {
                 client.BaseAddress = new Uri(base_url_amigo);
 
                 var response = await client.GetAsync($"api/Friend?id_user={id}");
 
-                if (response.IsSuccessStatusCode)
-                {
+                if(response.IsSuccessStatusCode) {
                     var responseContent = await response.Content.ReadAsStringAsync();
 
                     amigo = JsonConvert.DeserializeObject<FriendViewModel>(responseContent);
