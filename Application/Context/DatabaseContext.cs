@@ -7,7 +7,7 @@ using Application.Models.Territory.States;
 namespace Application.Database {
     public class DatabaseContext : DbContext {
 
-        private static string connection_string = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Assessment;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        private static string connection_string = @"C:\Users\c.rodrigues.junior\AppData\Local\Microsoft\Microsoft SQL Server Local DB\Instances\MSSQLLocalDB";
 
         public DbSet<State> States {
             get; set;
