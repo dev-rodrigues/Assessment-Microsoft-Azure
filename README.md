@@ -29,7 +29,7 @@ where				(1=1)
 return 0
 ```
 
-##SCRIPT STORED PROCEDURE `BUSCA SOMATORIO`
+## SCRIPT STORED PROCEDURE `BUSCA SOMATORIO`
 ```
 CREATE PROCEDURE [dbo].[Busca_Somatorio]
 
@@ -53,7 +53,7 @@ AS
 	select @pais as SUM_PAIS, @estado AS SUM_ESTADO, @amigos AS SUM_AMIGOS
 ```
 
-##SCRIPT STORED PROCEDURE `APAGAR AMIZADE`
+## SCRIPT STORED PROCEDURE `APAGAR AMIZADE`
 ```
 CREATE PROCEDURE [dbo].[Delete_Amizade]
 	@id_user as int
