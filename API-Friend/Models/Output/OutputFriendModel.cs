@@ -25,15 +25,18 @@ namespace API_Friend.Models.Output {
         }
 
         public static OutputFriendModel CreateOutputFriend(Friend friend) {
-            var country = new OutputCountryModel() {
-                Id = friend.Country.Id,
-                Name = friend.Country.Name
-            };
 
-            var state = new OutputStateModel() {
-                Id = friend.State.Id,
-                Name = friend.State.Name
-            };
+            var country = new OutputCountryModel();
+            if(friend.Country != null) {
+                country.Id = friend.Country.Id;
+                country.Name = friend.Country.Name;
+            }
+
+            var state = new OutputStateModel();
+            if(friend.Country != null) {
+                state.Id = friend.State.Id;
+                state.Name = friend.State.Name;
+            }
 
             //var localized_friends = new List<OutputSingleFriendModel>();
             //foreach(var obj in friend.Friends) {
