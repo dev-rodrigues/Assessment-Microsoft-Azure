@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +11,7 @@ using db = Application.Database.Database;
 
 namespace Application.Repository.Territory.Countries {
     public class CountryRepository : ICountry {
+        private static string connection_string = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Assessment;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
         public async Task<bool> Delete(Country country) {
             try {
@@ -18,6 +21,19 @@ namespace Application.Repository.Territory.Countries {
             } catch(Exception e) {
                 Console.WriteLine(e.Message);
                 return false;
+            }
+        }
+
+        public bool DeleteSP(int id_country) {
+            using(SqlConnection conn = new SqlConnection(connection_string)) {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conn;
+                cmd.CommandText = "Delete_Country";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("id_country", id_country);
+                conn.Open();
+                SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                return true;
             }
         }
 

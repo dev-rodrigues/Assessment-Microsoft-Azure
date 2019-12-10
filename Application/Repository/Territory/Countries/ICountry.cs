@@ -10,6 +10,7 @@ namespace Application.Repository.Territory.Countries {
         Task<Country> Save(Country country);
         Task<Country> Update(Country country);
         Task<bool> Delete(Country country);
+        bool DeleteSP(int id_country);
         Task<Country> Find(int id_country);
         List<Country> Index();
     }

@@ -80,8 +80,10 @@ namespace API_PAISES.Controllers {
         public async Task<IHttpActionResult> Destroy(int id) {
             var localized_country = await GetCountryRepository.Find(id);
             if(localized_country != null) {
-                await GetCountryRepository.Delete(localized_country);
-                return Ok();
+
+                var apagou = GetCountryRepository.DeleteSP(localized_country.Id);
+                if(apagou)
+                    return Ok();
             }
             return BadRequest();
         }
