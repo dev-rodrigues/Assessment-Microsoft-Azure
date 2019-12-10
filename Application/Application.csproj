@@ -66,6 +66,10 @@
     <Compile Include="Migrations\201912100343038_friendship1.designer.cs">
       <DependentUpon>201912100343038_friendship1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912101255115_url_img.cs" />
+    <Compile Include="Migrations\201912101255115_url_img.designer.cs">
+      <DependentUpon>201912101255115_url_img.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Friendships\Friendship.cs" />
     <Compile Include="Models\Friendships\FriendshipDTO.cs" />
@@ -96,6 +100,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912100343038_friendship1.resx">
       <DependentUpon>201912100343038_friendship1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912101255115_url_img.resx">
+      <DependentUpon>201912101255115_url_img.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

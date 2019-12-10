@@ -21,6 +21,7 @@ namespace Application.Models.Friends {
         public string Email { get; set; }
         public string Telephone { get; set; }
         public DateTime BirthDate { get; set; }
+        public string URLImg { get; set; }
 
         //public virtual ICollection<Friend> Friends { get; set; }
         //public virtual ICollection<Friendship> Friendships { get; set; }
