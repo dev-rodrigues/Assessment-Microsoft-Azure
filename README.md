@@ -29,6 +29,30 @@ where				(1=1)
 return 0
 ```
 
+##SCRIPT STORED PROCEDURE `BUSCA SOMATORIO`
+```
+CREATE PROCEDURE [dbo].[Busca_Somatorio]
+
+@pais		as int = 0,
+@estado		as int = 0,
+@amigos		as int = 0
+
+AS
+	select	@pais = 
+		COUNT(c.Id) 
+	from	dbo.Countries	as c
+
+	select	@estado =
+		COUNT(e.Id)
+	from	dbo.States	as e
+
+	select	@amigos =
+		COUNT(f.Id)
+	from	dbo.Friends	as f
+
+	select @pais as SUM_PAIS, @estado AS SUM_ESTADO, @amigos AS SUM_AMIGOS
+```
+
 ## Para atualizar o banco de dados
 ```
 Ferramentas > Gerenciados de Pacotes do NuGet > Console do Gerenciador de Pacotes
