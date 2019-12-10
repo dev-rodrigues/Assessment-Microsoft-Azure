@@ -71,15 +71,15 @@
       <DependentUpon>201912101255115_url_img.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Counts\Count.cs" />
     <Compile Include="Models\Friendships\Friendship.cs" />
     <Compile Include="Models\Friendships\FriendshipDTO.cs" />
     <Compile Include="Models\Friends\Friend.cs" />
     <Compile Include="Models\Territory\Countries\Country.cs" />
     <Compile Include="Models\Territory\States\State.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\Counts\FriendCount.cs" />
-    <Compile Include="Repository\Counts\FriendCountRepository.cs" />
-    <Compile Include="Repository\Counts\IFriendCount.cs" />
+    <Compile Include="Repository\Counts\CountRepository.cs" />
+    <Compile Include="Repository\Counts\ICount.cs" />
     <Compile Include="Repository\Friendships\FriendshipRepository.cs" />
     <Compile Include="Repository\Friendships\IFriendship.cs" />
     <Compile Include="Repository\Territory\Countries\CountryRepository.cs" />

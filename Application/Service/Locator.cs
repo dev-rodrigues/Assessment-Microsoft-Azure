@@ -28,7 +28,7 @@ namespace Application.Service {
         };
 
         private static Dictionary<Type, Type> SumFriends = new Dictionary<Type, Type> {
-            [typeof(IFriendCount)] = typeof(FriendCountRepository)
+            [typeof(ICount)] = typeof(CountRepository)
         };
 
         public static T GetInstanceOf<T>() {

@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Application.Models.Counts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.Repository.Counts {
-    public class FriendCount {
-        public int Sum { get; set; }
+    public interface ICount {
+        Task<Count> Sum();
     }
 }

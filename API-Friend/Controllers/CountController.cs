@@ -18,14 +18,15 @@ using System.Web.Http.ModelBinding;
 using System.Web.UI.WebControls;
 
 namespace API_Friend.Controllers {
-    public class FriendCountController : ApiController {
+
+    [RoutePrefix("api/count")]
+    public class CountController : ApiController {
 
         private IFriend GetFriendRepository { get; }
-        private IFriendCount GetFriendCount { get; }
+        private ICount GetFriendCount { get; }
 
-        public FriendCountController() {
-            this.GetFriendRepository = Locator.GetInstanceOf<FriendRepository>();
-            this.GetFriendCount = Locator.GetInstanceOf<FriendCountRepository>();
+        public CountController() {
+            this.GetFriendCount = Locator.GetInstanceOf<CountRepository>();
         }
 
         [HttpGet]
