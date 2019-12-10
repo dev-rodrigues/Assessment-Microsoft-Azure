@@ -17,7 +17,7 @@ namespace API_PAISES.Models.InputModel {
         }
 
         public string SetIdImage(string id) {
-            return $"url".ToLower() + id + ".png";
+            return @"https://gabrielcouto26.blob.core.windows.net/api-amigo-fotos/" + id + ".png";
         }
     }
 }

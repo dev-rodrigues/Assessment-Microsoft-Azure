@@ -1,4 +1,5 @@
 ﻿using MVC.Models;
+using MVC.Service;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -40,24 +41,34 @@ namespace MVC.Controllers {
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(FormCollection collection) {
-            var data = new Dictionary<string, string>
-            {
-                {"Name", collection["Name"]},
-                {"IdImage", collection["IdImage"]}
-            };
+        public async Task<ActionResult> Create(FormCollection collection, HttpPostedFileBase foto) {
 
-            using(var client = new HttpClient()) {
-                client.BaseAddress = new Uri(base_url);
+            //TEM FOTO E TEM NOME DO PAIS
+            if(foto != null && collection["name"].ToString() != null) {
 
-                using(var requestContent = new FormUrlEncodedContent(data)) {
-                    var response = await client.PostAsync("api/Country", requestContent);
+                string code_img = Guid.NewGuid().ToString();
+                new UploadAzure().UploadDeArquivo(foto.InputStream, $"{code_img}.png");
 
-                    if(response.IsSuccessStatusCode) {
-                        return RedirectToAction("Index");
+
+                var data = new Dictionary<string, string>
+                {
+                    {"Name", collection["Name"]},
+                    {"IdImage", code_img}
+                };
+
+                using(var client = new HttpClient()) {
+                    client.BaseAddress = new Uri(base_url);
+
+                    using(var requestContent = new FormUrlEncodedContent(data)) {
+                        var response = await client.PostAsync("api/Country", requestContent);
+
+                        if(response.IsSuccessStatusCode) {
+                            return RedirectToAction("Index");
+                        }
                     }
                 }
             }
+
             return View("Error");
         }
 
