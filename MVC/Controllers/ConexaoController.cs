@@ -16,7 +16,8 @@ namespace MVC.Controllers
 
         [HttpPost]
         public async Task<ActionResult> Index(int id_user) {
-            var conexoes = new List<ConexaoViewModel>();
+
+            var conexao = new IndexConexaoViewModel();
 
             using(var client = new HttpClient()) {
                 client.BaseAddress = new Uri(base_url_amigo);
@@ -26,11 +27,26 @@ namespace MVC.Controllers
                 if(response.IsSuccessStatusCode) {
                     var responseContent = await response.Content.ReadAsStringAsync();
 
-                    conexoes = JsonConvert.DeserializeObject<List<ConexaoViewModel>>(responseContent);
+                    conexao.Conexoes = JsonConvert.DeserializeObject<List<ConexaoViewModel>>(responseContent);
 
                     Session["IdUser"] = id_user;
 
-                    return View(conexoes);
+                }
+            }
+
+            using(var client = new HttpClient()) {
+                client.BaseAddress = new Uri(base_url_amigo);
+
+                var response = await client.GetAsync($"api/Friend");
+
+                if(response.IsSuccessStatusCode) {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+
+                    conexao.Friends = JsonConvert.DeserializeObject<List<FriendViewModel>>(responseContent);
+
+                    Session["IdUser"] = id_user;
+
+                    return View(conexao);
                 }
             }
             return View("Error");
@@ -43,15 +59,15 @@ namespace MVC.Controllers
 
             var data = new Dictionary<string, string>
             {
-                {"IdFollower", id_user.ToString()},
-                {"IdFollowed", IdUser}
+                {"id_seguidor", id_user.ToString()},
+                {"id_seguido", IdUser}
             };
 
             using(var client = new HttpClient()) {
                 client.BaseAddress = new Uri(base_url_amigo);
 
                 using(var requestContent = new FormUrlEncodedContent(data)) {
-                    var response = await client.PostAsync("api/Friend", requestContent);
+                    var response = await client.PostAsync("api/Friendship", requestContent);
 
                     if(response.IsSuccessStatusCode) {
                         return RedirectToAction("Index", "Amigo");

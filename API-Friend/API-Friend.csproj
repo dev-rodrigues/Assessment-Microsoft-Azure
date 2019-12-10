@@ -171,6 +171,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Input\InputConectarModel.cs" />
     <Compile Include="Models\Input\InputFriendModel.cs" />
     <Compile Include="Models\Input\InputFriendshipModel.cs" />
     <Compile Include="Models\Output\OutputConnection.cs" />

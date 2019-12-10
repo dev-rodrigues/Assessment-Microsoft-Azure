@@ -141,6 +141,7 @@
     <Compile Include="Models\edit\EditEstadoViewModel.cs" />
     <Compile Include="Models\EstadoViewModel.cs" />
     <Compile Include="Models\FriendViewModel.cs" />
+    <Compile Include="Models\IndexConexaoViewModel.cs" />
     <Compile Include="Models\OutputSomatorioModel.cs" />
     <Compile Include="Models\PaisViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

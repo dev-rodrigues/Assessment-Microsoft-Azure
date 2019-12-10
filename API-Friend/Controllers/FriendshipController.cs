@@ -32,9 +32,9 @@ namespace API_Friend.Controllers {
         }
 
         [HttpPost]
-        public async Task<IHttpActionResult> Store(InputFriendshipModel input) {
-            var seguidor = await GetFriendRepository.Find(input.IdFollower);
-            var seguido = await GetFriendRepository.Find(input.IdFollowed);
+        public async Task<IHttpActionResult> Store(InputConectarModel input) {
+            var seguidor = await GetFriendRepository.Find(Convert.ToInt32(input.id_seguidor));
+            var seguido = await GetFriendRepository.Find(Convert.ToInt32(input.id_seguido));
 
             if(seguido == null || seguidor == null) {
                 return BadRequest("Erro ao processar a solicitação");

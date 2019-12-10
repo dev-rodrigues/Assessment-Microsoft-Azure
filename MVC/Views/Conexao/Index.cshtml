@@ -1,40 +1,60 @@
-﻿@model IEnumerable<MVC.Models.ConexaoViewModel>
+﻿@model MVC.Models.IndexConexaoViewModel
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Conectados</h2>
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.IdFriend)
-        </th>
-
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
+            Nome
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+    @foreach(var item in Model.Conexoes) {
+        <tr>
+            <td>
+                @item.Name
+            </td>
+
+            <td>
+
+                <form action="/Conexao/Delete?id_user=@item.IdConnection" method="post">
+                    <button type="submit">Desconectar</button>
+                </form>
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+
+<h2>LI</h2>
+
+<table class="table">
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdFriend)
-        </td>
-
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-
-        <td>
-
-            <form action="/Conexao/Delete?id_user=@item.IdConnection" method="post">
-                <button type="submit">Desconectar</button>
-            </form>
-        </td>
+        <th>
+            Nome
+        </th>
+        <th></th>
     </tr>
-}
+
+    @foreach(var item in Model.Friends) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+
+            <td>
+                <form action="/Conexao/Create?id_user=@item.Id" method="post">
+                    <button type="submit">Conectar</button>
+                </form>
+            </td>
+        </tr>
+    }
 
 </table>
