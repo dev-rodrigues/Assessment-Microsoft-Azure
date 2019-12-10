@@ -44,9 +44,9 @@ namespace API_Friend.Controllers {
                 return BadRequest("Erro ao processar a solicitação");
             }
 
-             var friendship = new Friendship() {
-                 Follower = seguido,
-                 Followed = seguidor,
+            var friendship = new Friendship() {
+                Follower = seguido,
+                Followed = seguidor,
             };
 
             var saved_friendship = GetFriendship.Save(friendship);
@@ -55,6 +55,19 @@ namespace API_Friend.Controllers {
             if(saved_friendship != null) {
                 return Ok();
             }
+            return BadRequest("Erro ao processar a solicitação");
+        }
+
+        [HttpGet]
+        public async Task<IHttpActionResult> Show(int id_user) {
+
+            var my_friends = GetFriendship.Friends(id_user);
+
+            if(my_friends != null) {
+                var retorno = OutputSingleFriendModel.FriendModels(my_friends);
+                return Ok(retorno);
+            }
+
             return BadRequest("Erro ao processar a solicitação");
         }
 
