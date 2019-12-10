@@ -70,6 +70,10 @@
     <Compile Include="Migrations\201912101255115_url_img.designer.cs">
       <DependentUpon>201912101255115_url_img.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912101837135_seila.cs" />
+    <Compile Include="Migrations\201912101837135_seila.designer.cs">
+      <DependentUpon>201912101837135_seila.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Counts\Count.cs" />
     <Compile Include="Models\Friendships\Friendship.cs" />
@@ -106,6 +110,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912101255115_url_img.resx">
       <DependentUpon>201912101255115_url_img.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912101837135_seila.resx">
+      <DependentUpon>201912101837135_seila.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
